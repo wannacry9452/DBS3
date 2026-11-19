@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<title>Бие даалтын ажил - NoSQL өгөгдлийн сангууд</title>
+<style>
+    @page {
+        size: A4;
+        margin: 20mm 15mm 20mm 15mm;
+        @bottom-right {
+            content: counter(page);
+        }
+    }
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        line-height: 1.6;
+        color: #24292e;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 30px;
+        background: #ffffff;
+    }
+    h1.title-h1 {
+        color: #0b3c5d;
+        border-bottom: 3px solid #328cc1;
+        padding-bottom: 8px;
+        margin-top: 35px;
+        font-size: 26px;
+        page-break-after: avoid;
+    }
+    h2.title-h2 {
+        color: #1d2731;
+        border-bottom: 1.5px solid #eaecef;
+        padding-bottom: 6px;
+        margin-top: 28px;
+        font-size: 20px;
+        page-break-after: avoid;
+    }
+    h3.title-h3 {
+        color: #328cc1;
+        margin-top: 20px;
+        font-size: 16px;
+        page-break-after: avoid;
+    }
+    h4.title-h4 {
+        color: #555;
+        font-size: 14px;
+        margin-top: 14px;
+    }
+    p {
+        margin: 8px 0;
+        text-align: justify;
+        font-size: 14px;
+    }
+    pre {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 6px;
+        padding: 12px;
+        overflow-x: auto;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 12px;
+        line-height: 1.45;
+        page-break-inside: avoid;
+    }
+    code {
+        background: #f0f2f5;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: 'Consolas', monospace;
+        font-size: 13px;
+        color: #d73a49;
+    }
+    pre code {
+        background: transparent;
+        color: #24292e;
+        padding: 0;
+    }
+    table.doc-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        font-size: 13px;
+        page-break-inside: avoid;
+    }
+    table.doc-table th, table.doc-table td {
+        border: 1px solid #dfe2e5;
+        padding: 8px 12px;
+        text-align: left;
+    }
+    table.doc-table th {
+        background-color: #f1f8ff;
+        font-weight: 600;
+        color: #0b3c5d;
+    }
+    table.doc-table tr:nth-child(even) {
+        background-color: #fbfcfd;
+    }
+    li.doc-li {
+        margin-left: 20px;
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+    hr.page-divider {
+        border: none;
+        border-top: 2px dashed #ccc;
+        margin: 25px 0;
+    }
+    .cover {
+        text-align: center;
+        padding: 50px 0;
+        border: 2px solid #328cc1;
+        border-radius: 8px;
+        background: #fafbfc;
+        margin-bottom: 40px;
+        page-break-after: always;
+    }
+    .cover h1 {
+        font-size: 28px;
+        color: #0b3c5d;
+        margin-bottom: 15px;
+    }
+    .cover p {
+        font-size: 16px;
+        color: #555;
+        text-align: center;
+        margin: 6px 0;
+    }
+</style>
+</head>
+<body>
+<div class="cover">
+    <h1>БИЕ ДААЛТЫН ТАЙЛАН</h1>
+    <p><strong>Сэдэв:</strong> NoSQL өгөгдлийн сангууд — Онол, Загварчлал, Хэрэглээ, Туршилтын төсөл</p>
+    <p><strong>Хичээл:</strong> Өгөгдлийн сангийн систем (Database Systems)</p>
+    <p><strong>Хэрэгжүүлэлт:</strong> MongoDB, Python (Embedded Pure Python Engine & PyMongo Compatible)</p>
+    <p><strong>Хэмжээ:</strong> 10–15 хуудас бүхий цогц эрдэм шинжилгээ, туршилтын ажил</p>
+    <p><strong>Огноо:</strong> 2024 он</p>
+</div>
+
+<h1 class='title-h1'>БИЕ ДААЛТЫН ТАЙЛАН</h1>
+<br/>
+<p><strong>Сэдэв:</strong> NoSQL өгөгдлийн сангууд — Онол, Загварчлал, Хэрэглээ, Туршилтын төсөл  </p>
+<p><strong>Хичээлийн нэр:</strong> Өгөгдлийн сангийн систем (Database Systems)  </p>
+<p><strong>Гүйцэтгэсэн:</strong> Оюутан  </p>
+<p><strong>Хугацаа:</strong> 2024 оны 11-р сар  </p>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>ГАРЧИГ</h2>
+<br/>
+<li class='doc-li'>[ОРШИЛ](#оршил)</li>
+<li class='doc-li'>[НЭГДҮГЭЭР ХЭСЭГ: ОНОЛЫН СУДАЛГАА](#нэгдүгээр-хэсэг-онолын-судалгаа)</li>
+<p>  - [1. SQL vs NoSQL — Суурь ойлголт](#1-sql-vs-nosql--суурь-ойлголт)</p>
+<p>    - [1.1 SQL ба RDBMS архитектур, ACID зарчим](#11-sql-ба-rdbms-архитектур-acid-зарчим)</p>
+<p>    - [1.2 NoSQL үүссэн шалтгаан, түүхэн замнал](#12-nosql-үүссэн-шалтгаан-түүхэн-замнал)</p>
+<p>    - [1.3 Их хэмжээний өгөгдөл (Big Data) ба тархмал системийн шаардлага](#13-их-хэмжээний-өгөгдөл-big-data-ба-тархмал-системийн-шаардлага)</p>
+<p>  - [2. NoSQL системүүдийн 4 үндсэн төрөл](#2-nosql-системүүдийн-4-үндсэн-төрөл)</p>
+<p>    - [2.1 Түлхүүр-Утга (Key–Value Store)](#21-түлхүүр-утга-keyvalue-store)</p>
+<p>    - [2.2 Баримтад суурилсан (Document Store)](#22-баримтад-суурилсан-document-store)</p>
+<p>    - [2.3 Баганан өгөгдлийн сан (Wide-Column / Column-Family Store)](#23-баганан-өгөгдлийн-сан-wide-column--column-family-store)</p>
+<p>    - [2.4 Граф өгөгдлийн сан (Graph Database)](#24-граф-өгөгдлийн-сан-graph-database)</p>
+<p>    - [2.5 Төрлүүдийн нэгдсэн харьцуулсан матриц](#25-төрлүүдийн-нэгдсэн-харьцуулсан-матриц)</p>
+<p>  - [3. CAP Теорем ба PACELC өргөтгөл](#3-cap-теорем-ба-pacelc-өргөтгөл)</p>
+<p>    - [3.1 Consistency, Availability, Partition Tolerance-ийн мөн чанар](#31-consistency-availability-partition-tolerance-ийн-мөн-чанар)</p>
+<p>    - [3.2 Хэзээ CA, CP, AP системийг сонгох вэ?](#32-хэзээ-ca-cp-ap-системийг-сонгох-вэ)</p>
+<p>    - [3.3 Бодит NoSQL системүүдийн CAP ангилал](#33-бодит-nosql-системүүдийн-cap-ангилал)</p>
+<p>    - [3.4 PACELC онол](#34-pacelc-онол)</p>
+<p>  - [4. NoSQL-ийн өгөгдлийн загварчлалын зарчмууд](#4-nosql-ийн-өгөгдлийн-загварчлалын-зарчмууд)</p>
+<p>    - [4.1 Schema-less буюу Schema-flexible зарчим](#41-schema-less-буюу-schema-flexible-зарчим)</p>
+<p>    - [4.2 Documents vs Collections (RDBMS-тэй харьцуулах нь)](#42-documents-vs-collections-rdbms-тэй-харьцуулах-нь)</p>
+<p>    - [4.3 Wide-column загвар (Partition Key &amp; Clustering Key)](#43-wide-column-загвар-partition-key--clustering-key)</p>
+<p>    - [4.4 Relationship Modeling: Embedding vs Referencing](#44-relationship-modeling-embedding-vs-referencing)</p>
+<p>    - [4.5 Индексжүүлэлтийн стратеги](#45-индексжүүлэлтийн-стратеги)</p>
+<p>    - [4.6 Sharding ба Replication механизмууд](#46-sharding-ба-replication-механизмууд)</p>
+<p>  - [5. Том системүүдийн NoSQL архитектурын бодит кейс](#5-том-системүүдийн-nosql-архитектурын-бодит-кейс)</p>
+<p>    - [5.1 Netflix ба Apache Cassandra](#51-netflix-ба-apache-cassandra)</p>
+<p>    - [5.2 Facebook (Meta) ба TAO (Graph Cache)](#52-facebook-meta-ба-tao-graph-cache)</p>
+<p>    - [5.3 Amazon ба DynamoDB](#53-amazon-ба-dynamodb)</p>
+<p>    - [5.4 Uber ба Schemaless](#54-uber-ба-schemaless)</p>
+<li class='doc-li'>[ХОЁРДУГААР ХЭСЭГ: ПРАКТИК ТУРШИЛТЫН ТӨСӨЛ](#хоёрдугаар-хэсэг-практик-туршилтын-төсөл)</li>
+<p>  - [1. Системийн зорилго ба домэйн загвар](#1-системийн-зорилго-ба-домэйн-загвар)</p>
+<p>  - [2. Өгөгдлийн загварчлал ба Бүтэц](#2-өгөгдлийн-загварчлал-ба-бүтэц)</p>
+<p>    - [2.1 Logical Structure Diagram](#21-logical-structure-diagram)</p>
+<p>    - [2.2 JSON Document Schema (Product &amp; Order)](#22-json-document-schema-product--order)</p>
+<p>    - [2.3 Өгөгдлийн урсгалын зураглал (Data Flow Diagram)](#23-өгөгдлийн-урсгалын-зураглал-data-flow-diagram)</p>
+<p>  - [3. Өгөгдлийн сан үүсгэх ба Өгөгдөл оруулах (Dataset Seeding)](#3-өгөгдлийн-сан-үүсгэх-ба-өгөгдөл-оруулах-dataset-seeding)</p>
+<p>  - [4. CRUD Үйлдлүүдийн хэрэгжүүлэлт ба үр дүн](#4-crud-үйлдлүүдийн-хэрэгжүүлэлт-ба-үр-дүн)</p>
+<p>  - [5. Дэвшилтэт боломжуудын туршилт](#5-дэвшилтэт-боломжуудын-туршилт)</p>
+<p>    - [5.1 Aggregation Pipeline: Категорийн дүн шинжилгээ](#51-aggregation-pipeline-категорийн-дүн-шинжилгээ)</p>
+<p>    - [5.2 Aggregation Pipeline: \$unwind ашиглан сэтгэгдлийн тархалт тооцоолох](#52-aggregation-pipeline-unwind-ашиглан-сэтгэгдлийн-тархалт-тооцоолох)</p>
+<p>    - [5.3 Захиалгын борлуулалтын шинжилгээ](#53-захиалгын-борлуулалтын-шинжилгээ)</p>
+<p>    - [5.4 Текст хайлт (Text Search)](#54-текст-хайлт-text-search)</p>
+<p>    - [5.5 Индексжүүлэлтийн үр ашиг, гүйцэтгэлийн шинжилгээ (IXSCAN vs COLLSCAN)](#55-индексжүүлэлтийн-үр-ашиг-гүйцэтгэлийн-шинжилгээ-ixscan-vs-collscan)</p>
+<p>  - [6. Системийн консол ажиллагааны дэлгэцийн бүртгэл (Execution Proof)](#6-системийн-консол-ажиллагааны-дэлгэцийн-бүртгэл-execution-proof)</p>
+<li class='doc-li'>[ГУРАВДУГААР ХЭСЭГ: ДҮН ШИНЖИЛГЭЭ БА ХАРЬЦУУЛАЛТ](#гуравдугаар-хэсэг-дүн-шинжилгээ-ба-харьцуулалт)</li>
+<p>  - [1. MongoDB-ийн SQL (RDBMS)-тэй харьцуулсан давуу тал](#1-mongodb-ийн-sql-rdbms-тэй-харьцуулсан-давуу-тал)</p>
+<p>  - [2. Практикт ажиглагдсан сул тал, сорилтууд](#2-практикт-ажиглагдсан-сул-тал-сорилтууд)</p>
+<p>  - [3. Өөр хэрэгцээнд илүү тохирох NoSQL төрлүүдийн сонголт](#3-өөр-хэрэгцээнд-илүү-тохирох-nosql-төрлүүдийн-сонголт)</p>
+<p>  - [4. Судалгаа ба туршилтын явцад олж авсан хамгийн чухал ойлголтууд](#4-судалгаа-ба-туршилтын-явцад-олж-авсан-хамгийн-чухал-ойлголтууд)</p>
+<li class='doc-li'>[ДӨРӨВДҮГЭЭР ХЭСЭГ: ДҮГНЭЛТ БА САНАЛ ЗӨВЛӨМЖ](#дөрөвдүгээр-хэсэг-дүгнэлт-ба-санал-зөвлөмж)</li>
+<p>  - [1. Ерөнхий дүгнэлт](#1-ерөнхий-дүгнэлт)</p>
+<p>  - [2. Ирээдүйд өргөжүүлэх боломж](#2-ирээдүйд-өргөжүүлэх-боломж)</p>
+<p>  - [3. Бодит үйлдвэрлэлийн системд нэвтрүүлэх зөвлөмж](#3-бодит-үйлдвэрлэлийн-системд-нэвтрүүлэх-зөвлөмж)</p>
+<li class='doc-li'>[АШИГЛАСАН ЭХ СУРВАЛЖ, НОМ ЗҮЙ](#ашигласан-эх-сурвалж-ном-зүй)</li>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>ОРШИЛ</h2>
+<br/>
+<p>Сүүлийн хорин жилд мэдээллийн технологийн салбар, тэр дундаа интернет болон ухаалаг төхөөрөмжүүдийн хэрэглээ огцом өссөнөөр үүсэж буй өгөгдлийн хэмжээ, бүтэц, хурд урьд өмнө байгаагүй түвшинд хүрсэн. Уламжлалт холбоост өгөгдлийн сангийн удирдлагын системүүд (RDBMS) нь хатуу схемтэй (rigid schema), хүснэгт хоорондын олон холбоос бүхий нарийн нийлмэл бүтэцтэй, босоо чиглэлд (vertical scaling) өргөтгөгддөг тул орчин үеийн их хэмжээний (Big Data), динамик, тархмал орчны шаардлагыг бүрэн хангахад хүндрэлтэй болсон.</p>
+<br/>
+<p>Эдгээр хязгаарлалтыг даван туулах зорилгоор <strong>NoSQL (Not Only SQL)</strong> хөдөлгөөн үүсэж, өгөгдлийг хэвтээ чиглэлд (horizontal scaling) кластер байдлаар уян хатан байршуулах, схемийн хатуу хязгаарлалтгүйгээр хадгалах, өндөр хурдны уншилт/бичилтийг гүйцэтгэх өргөн боломжийг олгосон билээ.</p>
+<br/>
+<p>Энэхүү бие даалтын ажлын хүрээнд:</p>
+<p>1. NoSQL системүүдийн онолын үндэс, RDBMS ба NoSQL-ийн ялгаа, 4 үндсэн төрөл, CAP теорем, өгөгдөл загварчлалын зарчим, дэлхийн томоохон технологийн компаниудын архитектурын шийдлийг цогцоор судлав.</p>
+<p>2. Онолын мэдлэг дээрээ үндэслэн <strong>MongoDB</strong> систем дээр цахим худалдааны (E-Commerce) барааны каталог, динамик үзүүлэлт, хэрэглэгчийн үнэлгээ, сагс болон захиалгын урсгалыг шийдвэрлэсэн туршилтын системийг бүтээн ажиллав.</p>
+<p>3. Системийн хүрээнд 35 гаруй бодит бүтээгдэхүүн, 5 захиалгын баримтыг JSON хэлбэрээр загварчлан оруулж, бүрэн CRUD үйлдлүүд, Aggregation Pipeline, Текст хайлт, Индексжүүлэлтийн гүйцэтгэлийг туршин үр дүнг нэгтгэн дүгнэв.</p>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h1 class='title-h1'>НЭГДҮГЭЭР ХЭСЭГ: ОНОЛЫН СУДАЛГАА</h1>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>1. SQL vs NoSQL — Суурь ойлголт</h2>
+<br/>
+<h3 class='title-h3'>1.1 SQL ба RDBMS архитектур, ACID зарчим</h3>
+<br/>
+<p>1970 онд IBM-ийн судлаач Эдгар Ф. Кодд (Edgar F. Codd) реляци өгөгдлийн загварыг (Relational Model) анх боловсруулсан нь мэдээллийн санг удирдах стандарт хандлага болж хөгжсөн. Холбоост өгөгдлийн сангууд (RDBMS: Oracle, PostgreSQL, MySQL, Microsoft SQL Server гэх мэт) нь өгөгдлийг урьдчилан чанд тодорхойлсон мөр (row, tuple) ба багануудаас (column, attribute) бүрдэх хүснэгтүүдэд (tables/relations) хуваан хадгалдаг.</p>
+<br/>
+<p>RDBMS-ийн суурь зарчим нь өгөгдлийн давхардлыг арилгах, хамаарлыг цэгцлэх нормальчлал (Normalization: 1NF, 2NF, 3NF, BCNF) дээр суурилдаг. Өгөгдлийн зөрчилгүй, бүрэн бүтэн байдлыг хангахын тулд транзакцын <strong>ACID</strong> шаардлагыг чанд мөрддөг:</p>
+<br/>
+<p>1. <strong>Atomicity (Нэгдмэл байдал):</strong> Транзакц доторх бүх үйлдлүүд амжилттай хийгдэх эсвэл аль нэг нь алдаа гарвал бүх өөрчлөлт буцаагдана (All or Nothing).</p>
+<p>2. <strong>Consistency (Зөрчилгүй байдал):</strong> Транзакц эхлэх болон дуусах үед өгөгдлийн сангийн тогтоосон бүх дүрэм, гадаад түлхүүрийн (foreign key) хязгаарлалтууд үргэлж биелсэн байх ёстой.</p>
+<p>3. <strong>Isolation (Тусгаарлагдсан байдал):</strong> Зэрэгцэн ажиллаж буй олон транзакцууд бие биедээ нөлөөлөхгүйгээр тусдаа явагдана.</p>
+<p>4. <strong>Durability (Бат бөх байдал):</strong> Нэгэнт баталгаажсан (committed) өгөгдөл нь системийн гэмтэл, цахилгаан тасралт зэрэг тохиолдолд ч өгөгдлийн санд үлдэж хадгалагдана.</p>
+<br/>
+<p>Гэвч RDBMS нь өгөгдлийг олон хүснэгтэд салгаж нормальчилдог тул унших үед хүснэгтүүдийг хооронд нь холбох (<code>JOIN</code>) ажиллагаа маш өндөр тооцоолол, санах ой шаарддаг.</p>
+<br/>
+<h3 class='title-h3'>1.2 NoSQL үүссэн шалтгаан, түүхэн замнал</h3>
+<br/>
+<p>2000-аад оны эхээр Web 2.0 хувьсгал гарч, сошиал сүлжээ, ухаалаг утас, хэрэглэгчийн үүсгэсэн агуулга (UGC - User Generated Content) асар ихээр бий болсон. Үүний үр дүнд:</p>
+<li class='doc-li'><strong>Өгөгдлийн бүтэц олон төрөл болсон:</strong> Нэг бүтээгдэхүүн, нийтлэл бүр өөр өөр шинж чанартай болж, хатуу хүснэгтийн багананд багтахаа больсон (хэрэв 100 төрлийн бүтээгдэхүүнд зориулж 100 багана үүсгэвэл дийлэнх нь `NULL` утгаар дүүрдэг).</li>
+<li class='doc-li'><strong>Схем өөрчлөх өндөр зардал:</strong> Тэрбум мөртэй хүснэгтэд ганцхан багана нэмэх (`ALTER TABLE`) үйлдэл хэдэн цагаар хүснэгтийг түгжиж (table lock), системийг саатуулдаг.</li>
+<li class='doc-li'><strong>Босоо өргөтгөлийн (Vertical Scaling / Scale-Up) хязгаар:</strong> RDBMS нь хүчин чадлыг нэмэгдүүлэхийн тулд илүү үнэтэй, асар өндөр хүчин чадал бүхий ганц серверийг (илүү олон CPU цөм, терабайт RAM) худалдан авахыг шаарддаг. Гэвч ганц серверийн физик дээд хязгаар тулж, эдийн засгийн хувьд хэт үнэтэй болдог.</li>
+<br/>
+<p>Иймээс олон тооны хямд, энгийн серверүүдийг (Commodity Hardware) хооронд нь сүлжээгээр нэгтгэн ажиллуулах <strong>Хэвтээ өргөтгөл (Horizontal Scaling / Scale-Out)</strong> хийх боломжтой, хатуу схем шаарддаггүй шинэ үеийн өгөгдлийн сангууд шаардагдаж, &quot;Not Only SQL&quot; буюу NoSQL үүссэн. 2004 онд Google-ийн гаргасан &quot;Bigtable&quot;, 2007 онд Amazon-ий гаргасан &quot;Dynamo&quot; судалгааны бүтээлүүд нь орчин үеийн NoSQL системүүдийн үндэс болсон юм.</p>
+<br/>
+<h3 class='title-h3'>1.3 Их хэмжээний өгөгдөл (Big Data) ба тархмал системийн шаардлага</h3>
+<br/>
+<p>Өнөөгийн системүүд Big Data-ийн 5V шинж чанарыг хангах ёстой:</p>
+<li class='doc-li'><strong>Volume (Хэмжээ):</strong> Терабайт, петабайт, эксабайт хэмжээний өгөгдөл.</li>
+<li class='doc-li'><strong>Velocity (Хурд):</strong> Секунд тутамд сая сая бичилт, уншилтын хүсэлтийг маш бага хоцролттойгоор (low latency) боловсруулах.</li>
+<li class='doc-li'><strong>Variety (Олон төрөл зүйл):</strong> Бүтэцлэгдсэн (structured), хагас бүтэцлэгдсэн (JSON, XML), бүтэцгүй (видео, зураг, текст) өгөгдөл.</li>
+<li class='doc-li'><strong>Veracity (Үнэн магадлал):</strong> Мэдээллийн чанар, найдвартай байдлыг хангах.</li>
+<li class='doc-li'><strong>Value (Үнэ цэнэ):</strong> Бодит хугацаанд дүн шинжилгээ хийж бизнес шийдвэр гаргах.</li>
+<br/>
+<p>Тархмал системүүд нь өгөгдлийг олон серверт хуваан байршуулах (Sharding) болон хуулбарлан хадгалах (Replication) замаар нэг серверийн гэмтэл (Single Point of Failure) бүхэл системийг унагаахгүй байх өндөр хүртээмж (High Availability)-ийг хангадаг.</p>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>2. NoSQL системүүдийн 4 үндсэн төрөл</h2>
+<br/>
+<p>NoSQL системүүдийг өгөгдлийг хадгалах, индексжүүлэх архитектураас нь хамааран дараах 4 үндсэн төрөлд ангилдаг:</p>
+<br/>
+<pre><code>
+               ┌────────────────────────────────────────────────────────┐
+               │                NoSQL ӨГӨГДЛИЙН САНГУУД                 │
+               └───────────────────────────┬────────────────────────────┘
+         ┌───────────────────┬─────────────┴───────┬──────────────────┐
+         ▼                   ▼                     ▼                  ▼
+┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+│ 1. Key-Value    │ │ 2. Document     │ │ 3. Wide-Column  │ │ 4. Graph        │
+│   Store         │ │   Store         │ │   Store         │ │   Database      │
+├─────────────────┤ ├─────────────────┤ ├─────────────────┤ ├─────────────────┤
+│ • Redis         │ │ • MongoDB       │ │ • Cassandra     │ │ • Neo4j         │
+│ • DynamoDB      │ │ • CouchDB       │ │ • HBase         │ │ • ArangoDB      │
+│ • Memcached     │ │ • Firestore     │ │ • ScyllaDB      │ │ • Amazon Neptune│
+└─────────────────┘ └─────────────────┘ └─────────────────┘ └─────────────────┘
+</code></pre>
+<br/>
+<h3 class='title-h3'>2.1 Түлхүүр-Утга (Key–Value Store)</h3>
+<br/>
+<li class='doc-li'><strong>Архитектурын онцлог:</strong> Өгөгдлийг дэлхийн хамгийн энгийн бөгөөд хурдан загвар болох Хэш хүснэгтэд (Hash Table) хадгална. Түлхүүр (Key) бүрт тохирох дурын утга (Value: string, JSON, binary) харгалзана.</li>
+<li class='doc-li'><strong>Ашиглагддаг өгөгдлийн бүтэц:</strong> In-memory Hash Map, Skip Lists, Radix Tree.</li>
+<li class='doc-li'><strong>Давуу тал:</strong> Хязгааргүй өндөр хурд ($O(1)$ хугацааны нарийн төвөгтэй байдал), тохируулахад тун энгийн, асар их уншилт/бичилтийг тэсвэрлэх чадвар.</li>
+<li class='doc-li'><strong>Сул тал:</strong> Утга (Value) доторх талбараар нарийн шүүлтүүр, нөхцөлт хайлт хийх боломжгүй. Зөвхөн түлхүүрээр л дуудна.</li>
+<li class='doc-li'><strong>Түгээмэл хэрэгжүүлэлтүүд:</strong> Redis, Amazon DynamoDB, Memcached, Riak.</li>
+<li class='doc-li'><strong>Хэрэглээний бодит жишээ:</strong> Хэрэглэгчийн нэвтрэлтийн сесс хадгалах (Session Storage), Веб хуудасны хурдан кэш (Caching), Хэрэглэгчийн сагсны түр өгөгдөл, Лидер самбар (Leaderboard - Redis Sorted Sets).</li>
+<br/>
+<h3 class='title-h3'>2.2 Баримтад суурилсан (Document Store)</h3>
+<br/>
+<li class='doc-li'><strong>Архитектурын онцлог:</strong> Өгөгдлийг бүтэцлэгдсэн бие даасан баримт (Document: JSON, BSON, XML) хэлбэрээр хадгална. Баримт бүр өөрийн гэсэн схемтэй байж болох бөгөөд дотроо давхарласан (nested objects) болон массивыг (arrays) шууд агуулж чаддаг.</li>
+<li class='doc-li'><strong>Ашиглагддаг өгөгдлийн бүтэц:</strong> B-Tree, B+ Tree, WiredTiger хадгалах хөдөлгүүр.</li>
+<li class='doc-li'><strong>Давуу тал:</strong> Хүний уншихад болон програмчлалын хэлүүдийн объекттой (OOP) шууд нийцдэг (Object-Relational Impedance Mismatch байхгүй). Дотоод талбарууд дээр индекс үүсгэж, нарийн төвөгтэй шүүлтүүр, агрегаци хийх боломжтой.</li>
+<li class='doc-li'><strong>Сул тал:</strong> Хүснэгт хоорондын `JOIN` үйлдэл RDBMS шиг бүрэн оновчлогдоогүй, том баримтууд санах ойд ачаалал өгөх магадлалтай.</li>
+<li class='doc-li'><strong>Түгээмэл хэрэгжүүлэлтүүд:</strong> MongoDB, CouchDB, Firebase Firestore, Amazon DocumentDB.</li>
+<li class='doc-li'><strong>Хэрэглээний бодит жишээ:</strong> Цахим худалдааны олон төрлийн бүтээгдэхүүний каталог (E-Commerce Catalog), Агуулгын удирдлагын систем (CMS), Блог, Мобайл аппликейшний үндсэн өгөгдлийн сан.</li>
+<br/>
+<h3 class='title-h3'>2.3 Баганан өгөгдлийн сан (Wide-Column / Column-Family Store)</h3>
+<br/>
+<li class='doc-li'><strong>Архитектурын онцлог:</strong> Google Bigtable-ийн загвар дээр суурилсан. Өгөгдлийг мөрөөр бус, баганын бүлээр (Column Family) бүлэглэн дискэнд хадгална. Мөр бүр (`Row Key` буюу `Partition Key`) өөр өөр баганатай байж болох ба багана бүр өөрийн цагийн тэмдэглэгээтэй (Timestamp) байна.</li>
+<li class='doc-li'><strong>Ашиглагддаг өгөгдлийн бүтэц:</strong> LSM-Tree (Log-Structured Merge-tree), Memtable (санах ой), CommitLog, SSTable (диск дээрх эрэмбэлэгдсэн хүснэгтүүд).</li>
+<li class='doc-li'><strong>Давуу тал:</strong> Диск рүү бичих хурд маш өндөр (Append-only бичилт хийдэг тул random I/O байхгүй), асар их хэмжээний өгөгдөл дээр шахалт (Compression) маш сайн хийгддэг, петабайт хэмжээнд найдвартай ажиллана.</li>
+<li class='doc-li'><strong>Сул тал:</strong> Загварчлалыг зөвхөн хэрэглэгчийн асуулгад (Query-first modeling) зориулж хийх ёстой. Шинэ төрлийн асуулга хийхийн тулд өгөгдлийн бүтцээ өөрчлөх шаардлага гардаг.</li>
+<li class='doc-li'><strong>Түгээмэл хэрэгжүүлэлтүүд:</strong> Apache Cassandra, Apache HBase, ScyllaDB.</li>
+<li class='doc-li'><strong>Хэрэглээний бодит жишээ:</strong> Цагийн цуваа өгөгдөл (Time-series data), IoT төхөөрөмжүүдийн сенсорын мэдээлэл, Санхүүгийн гүйлгээний түүх, Серверийн лог бүртгэл.</li>
+<br/>
+<h3 class='title-h3'>2.4 Граф өгөгдлийн сан (Graph Database)</h3>
+<br/>
+<li class='doc-li'><strong>Архитектурын онцлог:</strong> Өгөгдлийг Оройнууд (Nodes - биетүүд), Ирмэгүүд (Edges - тэдгээрийн хоорондын чиглэлтэй харилцаа холбоо) болон Тэдгээрийн шинж чанарууд (Properties) хэлбэрээр дүрсэлдэг.</li>
+<li class='doc-li'><strong>Ашиглагддаг өгөгдлийн бүтэц:</strong> Index-Free Adjacency (орой бүр өөрийн хөршүүдийн санах ойн шууд заагчийг хадгалдаг).</li>
+<li class='doc-li'><strong>Давуу тал:</strong> Нарийн төвөгтэй, олон шатлалт холбоосууд (Deep traversal, N-level relationship)-ыг миллисекундын дотор хайдаг. RDBMS дээр 5-6 `JOIN` хийхэд гацдаг асуулгыг хялбархан шийддэг.</li>
+<li class='doc-li'><strong>Сул тал:</strong> Том кластерт хуваан байршуулах (Sharding) хийхэд графын ирмэгүүд олон сервер дамнадаг тул маш хүндрэлтэй.</li>
+<li class='doc-li'><strong>Түгээмэл хэрэгжүүлэлтүүд:</strong> Neo4j, ArangoDB, Amazon Neptune, OrientDB.</li>
+<li class='doc-li'><strong>Хэрэглээний бодит жишээ:</strong> Сошиал сүлжээний найзуудын холбоос (Social Graph), Банк санхүүгийн луйвар, мөнгө угаалтыг илрүүлэх (Fraud Detection), Бүтээгдэхүүний ухаалаг зөвлөмжийн систем (Recommendation Engine).</li>
+<br/>
+<h3 class='title-h3'>2.5 Төрлүүдийн нэгдсэн харьцуулсан матриц</h3>
+<br/>
+<table class='doc-table'>
+<tr><th>Шалгуур үзүүлэлт</th><th>Key–Value Store</th><th>Document Store</th><th>Column-Family Store</th><th>Graph Database</th></tr>
+<tr><td>**Өгөгдлийн загвар**</td><td>Түлхүүр ба Утга</td><td>Хагас бүтэцтэй баримт (JSON/BSON)</td><td>Мөр ба Баганын бүлэг (Sparse matrix)</td><td>Орой (Node) ба Ирмэг (Edge)</td></tr>
+<tr><td>**Үндсэн хөдөлгүүр**</td><td>Hash Map / In-Memory</td><td>B-Tree / WiredTiger</td><td>LSM-Tree / SSTables</td><td>Index-Free Adjacency</td></tr>
+<tr><td>**Уян хатан байдал**</td><td>Маш өндөр (утгын төрөл хамаарахгүй)</td><td>Маш өндөр (схемгүй/уян)</td><td>Дунд зэрэг (багана динамик)</td><td>Өндөр (харилцаа уян хатан)</td></tr>
+<tr><td>**Унших хурд**</td><td>Туйлын өндөр ($O(1)$)</td><td>Өндөр (индексээр)</td><td>Өндөр (Partition key-ээр)</td><td>Холбоо хайхад туйлын хурдан</td></tr>
+<tr><td>**Бичих хурд**</td><td>Туйлын өндөр</td><td>Өндөр</td><td>Асар өндөр (Append-only)</td><td>Дунд зэрэг</td></tr>
+<tr><td>**Шүүлтүүрийн чадавх**</td><td>Бага (Зөвхөн түлхүүрээр)</td><td>Маш баялаг (nested, array, aggregation)</td><td>Хязгаарлагдмал (зөвхөн түлхүүрээр)</td><td>Маш баялаг (Cypher замын хайлт)</td></tr>
+<tr><td>**Тархмал өргөтгөл**</td><td>Маш хялбар (Consistent Hashing)</td><td>Хялбар (Sharding)</td><td>Төгс (Masterless Peer-to-Peer)</td><td>Хүндрэлтэй (кластерт хуваах)</td></tr>
+</table>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>3. CAP Теорем ба PACELC өргөтгөл</h2>
+<br/>
+<h3 class='title-h3'>3.1 Consistency, Availability, Partition Tolerance-ийн мөн чанар</h3>
+<br/>
+<p>2000 онд Беркли их сургуулийн профессор Эрик Брюер (Eric Brewer) тархмал системүүдийн үндсэн хязгаарлалтыг тодорхойлсон <strong>CAP теорем</strong>-ийг дэвшүүлж, 2002 онд Сет Гилберт, Нэнси Линч нар математик баталгаа хийсэн.</p>
+<br/>
+<p>Тархмал системд дараах 3 шинж чанарыг нэгэн зэрэг 100% хангах боломжгүй, дээд тал нь 2-ыг л сонгох боломжтой:</p>
+<br/>
+<p>1. <strong>Consistency (C - Зөрчилгүй байдал):</strong> Кластерын бүх зангилаа (nodes) тухайн агшинд хамгийн сүүлийн үеийн нэгэн ижил өгөгдлийг уншиж өгнө. Өөрөөр хэлбэл аль нэг серверт бичилт хийгдсэн бол дараагийн агшинд аль ч серверээс уншихад тэр шинэ утга харагдана.</p>
+<p>2. <strong>Availability (A - Хүртээмжтэй байдал):</strong> Гэмтээгүй ажиллаж буй ямар ч серверт ирсэн хүснэгтийн унших/бичих хүсэлт бүрт алдаа заахгүйгээр (non-error response) амжилттай хариу өгнө.</p>
+<p>3. <strong>Partition Tolerance (P - Сүлжээний тасалдлыг тэсвэрлэх чадвар):</strong> Серверүүдийн хоорондох сүлжээ тасрах, холбоо тасрах, пакет гээгдэх үед ч систем үргэлжлүүлэн ажиллах чадвар.</p>
+<br/>
+<pre><code>
+                         ▲
+                        / \
+                       /   \
+                      /  C  \
+                     /       \
+                    /         \
+                   /   CA*     \
+                  /             \
+                 /   (RDBMS)     \
+                /                 \
+               /                   \
+    Consistency ───────────────────── Availability
+             \                     /
+              \   CP         AP   /
+               \ (Mongo) (Cassandra)
+                \                 /
+                 \       P       /
+                  \             /
+                   \           /
+                    \         /
+                     ▼       ▼
+              Partition Tolerance
+</code></pre>
+<br/>
+<h3 class='title-h3'>3.2 Хэзээ CA, CP, AP системийг сонгох вэ?</h3>
+<br/>
+<p>Бодит ертөнцийн тархмал компьютерийн сүлжээнд сервер хоорондын кабель тасрах, сүлжээний свитч гацах зэрэг сүлжээний саатал (Network Partition) гарцаагүй үүсдэг. Тиймээс тархмал системд <strong>Partition Tolerance (P) шинж чанарыг алгасах ямар ч боломжгүй</strong>. Иймээс инженерүүд бодит байдал дээр зөвхөн <strong>CP</strong> эсвэл <strong>AP</strong> хоёрын хооронд сонголт хийдэг:</p>
+<br/>
+<li class='doc-li'><strong>CP (Consistency + Partition Tolerance) сонгох тохиолдол:</strong></li>
+<p>  - Хэрэв сүлжээ тасарвал систем буруу хуучин өгөгдөл өгөхгүйн тулд тухайн зангилааг хүсэлт авахаас татгалзуулж түр блоклодог.</p>
+<p>  - <em>Хэрэгцээ:</em> Банкны дансны үлдэгдэл, төлбөрийн гүйлгээ, онгоц болон галт тэрэгний суудлын захиалга, барааны нарийн тоо ширхэг.</p>
+<li class='doc-li'><strong>AP (Availability + Partition Tolerance) сонгох тохиолдол:</strong></li>
+<p>  - Хэрэв сүлжээ тасарвал систем хэзээ ч хэрэглэгчид алдаа зааж зогсохгүй, тухайн зангилаа өөрт байгаа мэдээллээр хариулна. Сүлжээ буцаж холбогдоход өгөгдөл аажмаар синхрончлогдож нэгэн ижил болно (Eventual Consistency).</p>
+<p>  - <em>Хэрэгцээ:</em> Сошиал сүлжээний постууд, лайк, коммент, чат систем, веб аналитик, сенсорын өгөгдөл цуглуулах.</p>
+<br/>
+<p><em>(Тэмдэглэл: Сүлжээ хэзээ ч тасрахгүй гэж үздэг CA системүүд нь зөвхөн ганц сервер дээр ажилладаг уламжлалт RDBMS дээр л боломжтой).</em></p>
+<br/>
+<h3 class='title-h3'>3.3 Бодит NoSQL системүүдийн CAP ангилал</h3>
+<br/>
+<li class='doc-li'><strong>MongoDB (Үндсэн тохиргоогоороо CP):</strong> Replica Set дотор Primary зангилаа бичилт авдаг. Хэрэв Primary сүлжээнээс тасарвал шинэ Primary сонгогдох хүртэл (10-15 секунд) систем бичилт авахгүй зогсож, өгөгдлийн зөрчилгүй байдлыг (Consistency) эрхэмлэдэг.</li>
+<li class='doc-li'><strong>Apache Cassandra (Үндсэн тохиргоогоороо AP):</strong> Masterless бүтэцтэй тул ямар ч сервер унасан бусад серверүүд уншилт/бичилтийг үргэлжлүүлэн хүлээн авдаг (High Availability). Цагийн дараа өгөгдлийг синхрончилдог.</li>
+<li class='doc-li'><strong>Amazon DynamoDB (Тохируулж болдог Tunable AP/CP):</strong> Уншилт хийхдээ `Eventually Consistent Read` (AP) эсвэл `Strongly Consistent Read` (CP) сонгох боломжтой.</li>
+<li class='doc-li'><strong>Neo4j (Ганц зангилаанд CA, кластерт CP):</strong> Графын бүтцийн хамаарлыг алдагдуулахгүйн тулд кластер дээр Raft протоколоор хүчтэй консистенси хангадаг.</li>
+<br/>
+<h3 class='title-h3'>3.4 PACELC онол</h3>
+<br/>
+<p>2012 онд Йелийн их сургуулийн профессор Даниэл Абади CAP теоремын дутуу талыг нөхөж <strong>PACELC</strong> теоремыг гаргасан:</p>
+<li class='doc-li'>Хэрэв сүлжээний тасалдал гарвал (<strong>P</strong>artition): <strong>A</strong>vailability эсвэл <strong>C</strong>onsistency-ийн аль нэгийг сонгоно.</li>
+<li class='doc-li'>Хэрэв сүлжээ хэвийн бол (<strong>E</strong>lse): Хоцролт бага байх (<strong>L</strong>atency) эсвэл Бүрэн зөрчилгүй байдал (<strong>C</strong>onsistency)-ийн аль нэгийг золиослох хэрэгтэй болдог.</li>
+<br/>
+<p>Жишээ нь MongoDB нь сүлжээ хэвийн үед ч Secondary рүү бичилтийг хүлээвэл удах (Latency өсөх) тул <strong>PC/EC</strong>, харин Cassandra нь түргэн хариу өгөхийг эрхэмлэдэг тул <strong>PA/EL</strong> системд тооцогддог.</p>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>4. NoSQL-ийн өгөгдлийн загварчлалын зарчмууд</h2>
+<br/>
+<h3 class='title-h3'>4.1 Schema-less буюу Schema-flexible зарчим</h3>
+<br/>
+<p>RDBMS-д хүснэгт үүсгэхдээ баганын нэр, өгөгдлийн төрлийг урьдчилан зааж өгдөг. Харин Document NoSQL-д баримт бүр өөр өөрийн бүтэцтэй байж болно.</p>
+<p>Жишээ нь цахим дэлгүүрт:</p>
+<li class='doc-li'>Зөөврийн компьютер хадгалахад: `cpu`, `ram_gb`, `storage` талбаруудтай;</li>
+<li class='doc-li'>Гутал хадгалахад: `size_eu`, `color`, `material` талбаруудтай байх ба хоёулаа нэг коллекцид зэрэг оршиж чадна. Энэ нь кодын өөрчлөлтийг дагаад өгөгдлийн санг зогсоохгүйгээр шууд хөгжүүлэлт хийх (Agile development) боломжийг олгодог.</li>
+<br/>
+<h3 class='title-h3'>4.2 Documents vs Collections (RDBMS-тэй харьцуулах нь)</h3>
+<br/>
+<table class='doc-table'>
+<tr><th>RDBMS Холбоост Сан</th><th>MongoDB / Document NoSQL</th><th>Тайлбар</th></tr>
+<tr><td>**Database**</td><td>Database</td><td>Мэдээллийн сангийн хүрээ</td></tr>
+<tr><td>**Table**</td><td>Collection</td><td>Төрөл нэг бүлэг баримтуудын цуглуулга</td></tr>
+<tr><td>**Row / Record**</td><td>Document (BSON)</td><td>Мэдээллийн нэг бие даасан баримт</td></tr>
+<tr><td>**Column**</td><td>Field / Key</td><td>Баримт доторх талбарын түлхүүр</td></tr>
+<tr><td>**Index**</td><td>Index (B-Tree)</td><td>Хайлтыг хурдасгах индекс</td></tr>
+<tr><td>**Primary Key**</td><td>`_id` field (ObjectId)</td><td>Баримтыг ялгах дахин давтагдашгүй түлхүүр</td></tr>
+<tr><td>**JOIN**</td><td>Embedding эсвэл `$lookup`</td><td>Холбоос үүсгэх аргачлал</td></tr>
+</table>
+<br/>
+<h3 class='title-h3'>4.3 Wide-column загвар (Partition Key &amp; Clustering Key)</h3>
+<br/>
+<p>Cassandra зэрэг Column-family системүүдэд хүснэгтийг тодорхойлохдоо:</p>
+<li class='doc-li'><strong>Partition Key:</strong> Өгөгдлийг кластерын аль серверт байршуулахыг шийддэг (Хэш алгоритмаар тооцно).</li>
+<li class='doc-li'><strong>Clustering Key:</strong> Тухайн серверийн диск дотор өгөгдлийг ямар дарааллаар эрэмбэлж хадгалахыг заадаг.</li>
+<br/>
+<h3 class='title-h3'>4.4 Relationship Modeling: Embedding vs Referencing</h3>
+<br/>
+<p>NoSQL системүүдэд өгөгдлийн хоорондын хамаарлыг загварчлах хоёр үндсэн зам бий:</p>
+<br/>
+<pre><code>
+    ┌─────────────────────────┐         ┌─────────────────────────┐
+    │   1. EMBEDDING загвар   │         │  2. REFERENCING загвар  │
+    │    (Denormalization)    │         │     (Normalization)     │
+    ├─────────────────────────┤         ├─────────────────────────┤
+    │ {                       │         │ [Products Collection]   │
+    │   &quot;_id&quot;: 101,           │         │ {&quot;_id&quot;: 101, name: &quot;A&quot;} │
+    │   &quot;name&quot;: &quot;Laptop&quot;,     │         │                         │
+    │   &quot;reviews&quot;: [          │         │ [Reviews Collection]    │
+    │     {&quot;user&quot;: &quot;Билгүүн&quot;, │         │ {&quot;prod_id&quot;: 101, ...}   │
+    │      &quot;rating&quot;: 5}       │         │                         │
+    │   ]                     │         │ ──&gt; Асуулгаар холбох    │
+    │ }                       │         │     ($lookup / JOIN)    │
+    └─────────────────────────┘         └─────────────────────────┘
+</code></pre>
+<br/>
+<p>1. <strong>Embedding (Бүрэлдэхүүнд багтаах):</strong></p>
+<p>   - Холбоотой дэд өгөгдлийг эх баримт дотор массив эсвэл дэд объект байдлаар шууд оруулах.</p>
+<p>   - <em>Хэзээ ашиглах:</em> &quot;1-ээс цөөн&quot; (1-to-Few) харьцаа, эх өгөгдөлтэйгээ үргэлж хамт уншигддаг, бие даан орших шаардлагагүй дэд өгөгдлүүд (Бүтээгдэхүүний үзүүлэлтүүд, хаягийн мэдээлэл, сэтгэгдлүүд).</p>
+<p>   - <em>Давуу тал:</em> Нэг хүсэлтээр бүх өгөгдөл уншигдана (JOIN байхгүй тул маш хурдан).</p>
+<p>2. <strong>Referencing (Заагчаар холбох):</strong></p>
+<p>   - Өгөгдлийг тусдаа коллекцид хадгалж, зөвхөн ID заагчаар холбох.</p>
+<p>   - <em>Хэзээ ашиглах:</em> &quot;1-ээс хязгааргүй олон&quot; (1-to-Many, 1-to-Squillions) харьцаа, өгөгдөл нь байнга өөрчлөгддөг, олон өөр газраас бие даан дуудагддаг тохиолдолд (Жишээ нь: Хэрэглэгчид ба Захиалгууд).</p>
+<br/>
+<h3 class='title-h3'>4.5 Индексжүүлэлтийн стратеги</h3>
+<br/>
+<p>Өгөгдлийн сангаас хайлт хийхэд цуглуулгын бүх баримтыг эхнээс нь дуустал уншихыг <strong>COLLSCAN (Collection Scan)</strong> гэдэг. Энэ нь сая сая өгөгдөлтэй үед системийг туйлын удаашруулдаг. Харин талбар дээр индекс үүсгэвэл <strong>B-Tree</strong> мод бүтцээр хайж <strong>IXSCAN (Index Scan)</strong> горимд шилжиж $O(\log N)$ хугацаанд гүйцэтгэнэ.</p>
+<li class='doc-li'><strong>Single Field Index:</strong> Нэг талбараар (`price: 1`).</li>
+<li class='doc-li'><strong>Compound Index:</strong> Олон талбарыг хослуулан (`category: 1, price: -1`).</li>
+<li class='doc-li'><strong>Multikey Index:</strong> Массив талбар дээр (`tags`).</li>
+<li class='doc-li'><strong>Text Index:</strong> Үг, өгүүлбэрээр хайхад зориулагдсан тонгоруулсан индекс (Inverted Index).</li>
+<br/>
+<h3 class='title-h3'>4.6 Sharding ба Replication механизмууд</h3>
+<br/>
+<li class='doc-li'><strong>Replication (Хуулбарлалт):</strong> MongoDB нь <strong>Replica Set</strong> ашигладаг. Нэг зангилаа нь Primary (бүх бичилтийг хүлээн авдаг) байх бөгөөд өөрчлөлтийн үйлдлүүдийг `oplog`-оор дамжуулан Secondary зангилаанууд руу тасралтгүй хуулбарладаг. Хэрэв Primary унавал Secondary зангилаанууд автоматаар сонгууль (Heartbeat &amp; Consensus) явуулж, шинэ Primary-г сонгодог.</li>
+<li class='doc-li'><strong>Sharding (Хэвтээ хуваалт):</strong> Өгөгдлийг олон сервер кластерт хувааж байршуулах үйл явц. `Shard Key`-ээр тодорхойлогдсон өгөгдлийн хэсгүүдийг (Chunks) автомат тэнцвэржүүлэгч (Balancer) серверүүдийн хооронд жигд хуваарилдаг.</li>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>5. Том системүүдийн NoSQL архитектурын бодит кейс</h2>
+<br/>
+<h3 class='title-h3'>5.1 Netflix ба Apache Cassandra</h3>
+<br/>
+<p>Netflix нь дэлхий даяар 250 гаруй сая идэвхтэй хэрэглэгчтэй бөгөөд тэдний үзсэн киноны түүх, сүүлийн үзэж байгаад зогсоосон минут секунд, видео төхөөрөмжийн төлөвийг <strong>Apache Cassandra</strong> өгөгдлийн сан дээр хадгалдаг.</p>
+<li class='doc-li'>*Яагаад Cassandra-г сонгосон бэ?* Netflix нь Amazon AWS-ийн дэлхийн 3 бүс нутагт (Multi-Region) ажилладаг. Cassandra-ийн Masterless архитектур нь нэг тив дэх сервер унасан ч нөгөө тивийн сервер хэрэглэгчид огт сааталгүй үйлчилж, $99.999\%$ өндөр хүртээмж (Zero Downtime) хангадаг.</li>
+<br/>
+<h3 class='title-h3'>5.2 Facebook (Meta) ба TAO (Graph Cache)</h3>
+<br/>
+<p>Facebook нь хэрэглэгчид, постууд, зургууд, комментууд, тэдгээрийн хоорондох найзын харилцаа, лайк зэрэг хамаарлыг Граф бүтэц гэж хардаг.</p>
+<li class='doc-li'>Тэд өдөрт хэдэн тэрбум хандалттай энэхүү аварга том нийгмийн сүлжээний графын хайлтыг гүйцэтгэхийн тулд <strong>TAO (The Associations and Objects)</strong> хэмээх distributed in-memory graph datastore бүтээж ашигладаг.</li>
+<br/>
+<h3 class='title-h3'>5.3 Amazon ба DynamoDB</h3>
+<br/>
+<p>Amazon 2007 онд цахим худалдааны системийн хамгийн чухал хэсэг болох хэрэглэгчийн сагс (Shopping Cart) болон төлбөрийн сессийн найдвартай байдалд зориулж Dynamo архитектурыг боловсруулсан. &quot;Black Friday&quot; зэрэг хэт ачааллын үед RDBMS серверүүд гацах эрсдэлтэй тул Consistent Hashing ашиглан ямар ч үед хүсэлтийг амжилттай бүртгэдэг <strong>Amazon DynamoDB</strong> үүлэн NoSQL санг бүтээсэн.</p>
+<br/>
+<h3 class='title-h3'>5.4 Uber ба Schemaless</h3>
+<br/>
+<p>Uber анх PostgreSQL ашиглаж байсан боловч хот болгонд такси дуудлагын байршил, аяллын өгөгдөл секунд тутамд сая саяар нэмэгдэж ирэх үед хүснэгтийн схем өөрчлөх, өргөтгөхөд хүндрэл учирсан. Иймд тэд өөрсдийн <strong>Schemaless</strong> хэмээх append-only fault-tolerant NoSQL системийг зохион бүтээж, аяллын баримтуудыг хадгалах болсон.</p>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h1 class='title-h1'>ХОЁРДУГААР ХЭСЭГ: ПРАКТИК ТУРШИЛТЫН ТӨСӨЛ</h1>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>1. Системийн зорилго ба домэйн загвар</h2>
+<br/>
+<p>Энэхүү практик ажлын хүрээнд орчин үеийн электрон барааны цахим худалдааны платформ болох <strong>&quot;TechStore NoSQL Catalog &amp; Order Management System&quot;</strong>-ийг MongoDB технологи дээр түшиглэн амжилттай хөгжүүлэв.</p>
+<br/>
+<p><strong>Системийн зорилго:</strong></p>
+<p>1. Олон төрлийн ангиллын (Зөөврийн компьютер, ухаалаг утас, гэр ахуй, ухаалаг төхөөрөмж) эрс тэс өөр техникийн үзүүлэлттэй бараануудыг уян хатан схемээр найдвартай хадгалах.</p>
+<p>2. Хэрэглэгчдийн сэтгэгдэл, 5 одтой үнэлгээг барааны баримт дотор нь шууд суулгах (Embedded document pattern).</p>
+<p>3. Хэрэглэгч болон бараануудыг холбосон захиалгын урсгалыг (Orders collection) үүсгэж, төлбөрийн төлөв, борлуулалтын шинжилгээг хийх.</p>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>2. Өгөгдлийн загварчлал ба Бүтэц</h2>
+<br/>
+<h3 class='title-h3'>2.1 Logical Structure Diagram</h3>
+<br/>
+<pre><code>
+┌────────────────────────────────────────────────────────────────────────┐
+│                        COLLECTION: products                            │
+├────────────────────────────────────────────────────────────────────────┤
+│ _id                 : String (PROD-001)                                │
+│ name                : String (&quot;Apple MacBook Pro 16 M3 Max&quot;)           │
+│ category            : String (&quot;Computers &amp; Laptops&quot;)                   │
+│ brand               : String (&quot;Apple&quot;)                                 │
+│ price               : Double (3499.00)                                 │
+│ stock               : Int (18)                                         │
+│ specs               : Object (Dynamic: cpu, ram_gb, storage, screen...)│
+│ tags                : Array of String [&quot;laptop&quot;, &quot;apple&quot;, &quot;m3&quot;]        │
+│ rating_summary      : Object { average_rating: 4.9, review_count: 4 }  │
+│ reviews (Embedded)  : Array of Objects [                               │
+│                         { user_name, rating, comment, date }           │
+│                       ]                                                │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │ Referencing via product_id
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                         COLLECTION: orders                             │
+├────────────────────────────────────────────────────────────────────────┤
+│ _id                 : String (ORD-2024-001)                            │
+│ customer            : Object { customer_id, name, email, phone }       │
+│ shipping_address    : Object { city, district, street, zip }           │
+│ items (Snapshot)    : Array of Objects [                               │
+│                         { product_id, product_name, unit_price, qty }  │
+│                       ]                                                │
+│ payment             : Object { method, status, total_amount, txn_id }  │
+│ order_status        : String (&quot;DELIVERED&quot;)                             │
+│ created_at          : ISO Date                                         │
+└────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<br/>
+<h3 class='title-h3'>2.2 JSON Document Schema (Product &amp; Order)</h3>
+<br/>
+<h4 class='title-h4'>Бүтээгдэхүүний баримтын бүтэц (Жишээ):</h4>
+<pre><code>
+{
+  &quot;product_id&quot;: &quot;PROD-001&quot;,
+  &quot;name&quot;: &quot;Apple MacBook Pro 16 M3 Max&quot;,
+  &quot;slug&quot;: &quot;macbook-pro-16-m3-max&quot;,
+  &quot;category&quot;: &quot;Computers &amp; Laptops&quot;,
+  &quot;sub_category&quot;: &quot;Laptops&quot;,
+  &quot;brand&quot;: &quot;Apple&quot;,
+  &quot;price&quot;: 3499.00,
+  &quot;discount_price&quot;: 3299.00,
+  &quot;stock&quot;: 18,
+  &quot;status&quot;: &quot;in_stock&quot;,
+  &quot;specs&quot;: {
+    &quot;processor&quot;: &quot;Apple M3 Max (16-core CPU, 40-core GPU)&quot;,
+    &quot;ram_gb&quot;: 48,
+    &quot;storage&quot;: &quot;1TB SSD&quot;,
+    &quot;display_inch&quot;: 16.2,
+    &quot;battery_hours&quot;: 22
+  },
+  &quot;tags&quot;: [&quot;laptop&quot;, &quot;apple&quot;, &quot;m3&quot;, &quot;workstation&quot;, &quot;macos&quot;],
+  &quot;rating_summary&quot;: {
+    &quot;average_rating&quot;: 4.9,
+    &quot;review_count&quot;: 4
+  },
+  &quot;reviews&quot;: [
+    {
+      &quot;review_id&quot;: &quot;REV-101&quot;,
+      &quot;user_name&quot;: &quot;Билгүүн&quot;,
+      &quot;rating&quot;: 5,
+      &quot;comment&quot;: &quot;Хөгжүүлэлт хийхэд гайхалтай хурдан, батарей маш сайн барьж байна.&quot;,
+      &quot;date&quot;: &quot;2024-01-15T10:30:00Z&quot;
+    }
+  ],
+  &quot;created_at&quot;: &quot;2023-11-10T08:00:00Z&quot;
+}
+</code></pre>
+<br/>
+<h3 class='title-h3'>2.3 Өгөгдлийн урсгалын зураглал (Data Flow Diagram)</h3>
+<br/>
+<pre><code>
+flowchart LR
+    A[Хэрэглэгч / Web Client] --&gt;|1. Бараа хайх &amp; Шүүх| B(MongoDB Products Collection)
+    B --&gt;|2. Шүүгдсэн баримтууд| A
+    A --&gt;|3. Сагсанд хийж захиалах| C(Order Processing Engine)
+    C --&gt;|4. Stock шалгах &amp; -1 inc хийх| B
+    C --&gt;|5. Захиалгын баримт үүсгэх| D(MongoDB Orders Collection)
+    A --&gt;|6. Сэтгэгдэл бичих| E(Review Service)
+    E --&gt;|7. $push сэтгэгдэл &amp; $set үнэлгээ| B
+    F[(Аналитик тайлан)] --&gt;|8. Aggregation Pipeline| B
+    F --&gt;|9. Борлуулалтын Pipeline| D
+</code></pre>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>3. Өгөгдлийн сан үүсгэх ба Өгөгдөл оруулах (Dataset Seeding)</h2>
+<br/>
+<p>Төслийн хүрээнд <code>dataset.json</code> файлд 10 өөр ангиллыг хамарсан <strong>35 бодит бүтээгдэхүүний дэлгэрэнгүй баримт</strong>, <code>orders_dataset.json</code> файлд <strong>5 захиалгын баримт</strong> бэлтгэгдсэн.</p>
+<li class='doc-li'>Ангилал бүр (Зөөврийн компьютер, Утас, Аудио, Дэлгэц, Тоос сорогч, Ухаалаг гэр гэх мэт) өөрийн гэсэн өвөрмөц үзүүлэлтүүд бүхий `specs` дэд объекттой.</li>
+<li class='doc-li'>`db_setup.py` скрипт нь өгөгдлийг цэвэрлэн шинээр үүсгэж, шаардлагатай индексүүдийг үүсгэнэ:</li>
+<p>  - <code>idx_category_price</code>: <code>[(&quot;category&quot;, 1), (&quot;price&quot;, -1)]</code></p>
+<p>  - <code>idx_brand</code>: <code>brand</code></p>
+<p>  - <code>idx_customer_id</code>: <code>customer.customer_id</code></p>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>4. CRUD Үйлдлүүдийн хэрэгжүүлэлт ба үр дүн</h2>
+<br/>
+<p>Бүх CRUD үйлдлүүд <code>crud_operations.py</code> модуль дээр хэрэгжсэн бөгөөд дараах онцлог операторуудыг багтаав:</p>
+<br/>
+<h3 class='title-h3'>4.1 CREATE Үйлдэл</h3>
+<pre><code>
+# Шинэ бүтээгдэхүүний баримтыг insert_one ашиглан оруулах
+new_product = {
+    &quot;product_id&quot;: &quot;PROD-036&quot;,
+    &quot;name&quot;: &quot;Apple Vision Pro 512GB Spatial Computer&quot;,
+    &quot;category&quot;: &quot;Smartphones &amp; Tablets&quot;,
+    &quot;brand&quot;: &quot;Apple&quot;,
+    &quot;price&quot;: 3699.00,
+    &quot;stock&quot;: 10,
+    &quot;specs&quot;: {&quot;display&quot;: &quot;Dual Micro-OLED 23M&quot;, &quot;chip&quot;: &quot;M2 + R1&quot;},
+    &quot;tags&quot;: [&quot;apple&quot;, &quot;vision-pro&quot;, &quot;spatial-computing&quot;]
+}
+result = collection.insert_one(new_product)
+</code></pre>
+<p><em>Консол үр дүн:</em></p>
+<p><code>[CREATE] Product added with ID: &#x27;PROD-036&#x27; | Name: Apple Vision Pro 512GB Spatial Computer</code></p>
+<br/>
+<h3 class='title-h3'>4.2 READ Үйлдэл (Шүүлтүүр ба Nested хайлт)</h3>
+<li class='doc-li'><strong>ID-аар хайх:</strong> `find_one({&quot;product_id&quot;: &quot;PROD-036&quot;})`</li>
+<li class='doc-li'><strong>Үнийн хязгаар ба ангиллаар хайх:</strong></li>
+<p>  <code></code>`python</p>
+<p>  collection.find({</p>
+<p>      &quot;category&quot;: &quot;Computers &amp; Laptops&quot;,</p>
+<p>      &quot;price&quot;: {&quot;$gte&quot;: 1000, &quot;$lte&quot;: 2600}</p>
+<p>  }).sort(&quot;price&quot;, 1)</p>
+<p>  <code></code>`</p>
+<li class='doc-li'><strong>Nested талбараар хайх (RAM &gt;= 32GB):</strong></li>
+<p>  <code></code>`python</p>
+<p>  collection.find({&quot;specs.ram_gb&quot;: {&quot;$gte&quot;: 32}})</p>
+<p>  <code></code>`</p>
+<li class='doc-li'><strong>Массивын талбараар хайх:</strong></li>
+<p>  <code></code>`python</p>
+<p>  collection.find({&quot;tags&quot;: &quot;developer&quot;})</p>
+<p>  <code></code>`</p>
+<br/>
+<h3 class='title-h3'>4.3 UPDATE Үйлдэл (\$set, \$inc, \$push)</h3>
+<li class='doc-li'><strong>Үнэ шинэчлэх (\$set) ба Үлдэгдлийг бууруулах (\$inc):</strong></li>
+<p>  <code></code>`python</p>
+<p>  collection.update_one(</p>
+<p>      {&quot;product_id&quot;: &quot;PROD-036&quot;},</p>
+<p>      {</p>
+<p>          &quot;$set&quot;: {&quot;price&quot;: 3499.00},</p>
+<p>          &quot;$inc&quot;: {&quot;stock&quot;: -1}</p>
+<p>      }</p>
+<p>  )</p>
+<p>  <code></code>`</p>
+<li class='doc-li'><strong>Сэтгэгдлийн массив руу шинэ үнэлгээ нэмэх (\$push):</strong></li>
+<p>  <code></code>`python</p>
+<p>  collection.update_one(</p>
+<p>      {&quot;product_id&quot;: &quot;PROD-036&quot;},</p>
+<p>      {&quot;$push&quot;: {&quot;reviews&quot;: {&quot;user_name&quot;: &quot;Наранбаатар&quot;, &quot;rating&quot;: 4.8, &quot;comment&quot;: &quot;Шилдэг бүтээгдэхүүн&quot;}}}</p>
+<p>  )</p>
+<p>  <code></code>`</p>
+<br/>
+<h3 class='title-h3'>4.4 DELETE Үйлдэл</h3>
+<li class='doc-li'><strong>Баримт устгах:</strong></li>
+<p>  <code></code>`python</p>
+<p>  collection.delete_one({&quot;product_id&quot;: &quot;PROD-TEMP-999&quot;})</p>
+<p>  <code></code>`</p>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>5. Дэвшилтэт боломжуудын туршилт</h2>
+<br/>
+<h3 class='title-h3'>5.1 Aggregation Pipeline: Категорийн дүн шинжилгээ</h3>
+<br/>
+<p>Бүтээгдэхүүний ангилал тус бүрээр нийт барааны тоо, дундаж үнэ, үнийн доод/дээд хязгаар болон нийт үлдэгдлийг нэгтгэн дүгнэв.</p>
+<pre><code>
+pipeline = [
+    {
+        &quot;$group&quot;: {
+            &quot;_id&quot;: &quot;$category&quot;,
+            &quot;product_count&quot;: {&quot;$sum&quot;: 1},
+            &quot;avg_price&quot;: {&quot;$avg&quot;: &quot;$price&quot;},
+            &quot;min_price&quot;: {&quot;$min&quot;: &quot;$price&quot;},
+            &quot;max_price&quot;: {&quot;$max&quot;: &quot;$price&quot;},
+            &quot;total_stock&quot;: {&quot;$sum&quot;: &quot;$stock&quot;}
+        }
+    },
+    {&quot;$sort&quot;: {&quot;product_count&quot;: -1}}
+]
+</code></pre>
+<p><em>Үр дүнгийн нэгтгэл:</em></p>
+<br/>
+<table class='doc-table'>
+<tr><th>Ангилал (Category)</th><th>Барааны тоо</th><th>Дундаж үнэ</th><th>Үнийн хязгаар</th><th>Нийт үлдэгдэл</th></tr>
+<tr><td>**Audio &amp; Sound**</td><td>6</td><td>\$342.66</td><td>\$149 - \$449</td><td>157</td></tr>
+<tr><td>**Computers &amp; Laptops**</td><td>5</td><td>\$2197.20</td><td>\$190 - \$3499</td><td>83</td></tr>
+<tr><td>**Smartphones &amp; Tablets**</td><td>5</td><td>\$1643.00</td><td>\$999 - \$3499</td><td>78</td></tr>
+<tr><td>**Accessories &amp; Peripherals**</td><td>5</td><td>\$625.79</td><td>\$100 - \$1800</td><td>123</td></tr>
+<tr><td>**Cameras &amp; Photography**</td><td>3</td><td>\$1718.98</td><td>\$959 - \$2498</td><td>28</td></tr>
+<tr><td>**Home &amp; Kitchen**</td><td>3</td><td>\$1283.31</td><td>\$750 - \$1600</td><td>30</td></tr>
+<tr><td>**Smart Home &amp; IoT**</td><td>3</td><td>\$232.99</td><td>\$200 - \$250</td><td>61</td></tr>
+<tr><td>**Gaming &amp; Consoles**</td><td>2</td><td>\$399.99</td><td>\$350 - \$450</td><td>41</td></tr>
+<tr><td>**TV &amp; Home Entertainment**</td><td>2</td><td>\$2199.49</td><td>\$1900 - \$2499</td><td>15</td></tr>
+<tr><td>**Wearables &amp; Smartwatches**</td><td>2</td><td>\$849.50</td><td>\$799 - \$900</td><td>25</td></tr>
+</table>
+<br/>
+<h3 class='title-h3'>5.2 Aggregation Pipeline: \$unwind ашиглан сэтгэгдлийн тархалт тооцоолох</h3>
+<br/>
+<p>Баримт дотор массив хэлбэрээр байрлах олон сэтгэгдлүүдийг <code>$unwind</code> оператороор бие даасан мөр болгон задлаад, хэрэглэгчдийн өгсөн одны үнэлгээний тархалтыг тооцоолов:</p>
+<li class='doc-li'>⭐ 5 од: 42 сэтгэгдэл</li>
+<li class='doc-li'>⭐ 4.8 од: 12 сэтгэгдэл</li>
+<li class='doc-li'>⭐ 4.7 од: 8 сэтгэгдэл</li>
+<li class='doc-li'>⭐ 4.6 од: 4 сэтгэгдэл</li>
+<li class='doc-li'>⭐ 4.5 од: 8 сэтгэгдэл</li>
+<li class='doc-li'>⭐ 4.0 од: 2 сэтгэгдэл</li>
+<br/>
+<h3 class='title-h3'>5.3 Захиалгын борлуулалтын шинжилгээ</h3>
+<br/>
+<p>Захиалгуудыг төлбөрийн хэрэгслээр нь бүлэглэн нийт орлогыг дүгнэхэд:</p>
+<li class='doc-li'><strong>QPay:</strong> 2 захиалга, Нийт \$3,683.98</li>
+<li class='doc-li'><strong>Bank Transfer:</strong> 1 захиалга, Нийт \$1,348.00</li>
+<li class='doc-li'><strong>SocialPay:</strong> 1 захиалга, Нийт \$747.99</li>
+<li class='doc-li'><strong>Credit Card:</strong> 1 захиалга, Нийт \$649.99</li>
+<br/>
+<h3 class='title-h3'>5.4 Текст хайлт (Text Search)</h3>
+<br/>
+<p>Түлхүүр үг &quot;apple m3&quot; гэж хайхад нэр болон таг дотроос харгалзах &quot;Apple MacBook Pro 16 M3 Max&quot; барааг нарийвчлан олсон.</p>
+<br/>
+<h3 class='title-h3'>5.5 Индексжүүлэлтийн үр ашиг, гүйцэтгэлийн шинжилгээ (IXSCAN vs COLLSCAN)</h3>
+<br/>
+<li class='doc-li'><strong>Query 1 (Индекстэй асуулга: `idx_category_price`):</strong></li>
+<p>  - Төлөв: <code>IXSCAN</code></p>
+<p>  - Ажилласан хугацаа: <strong>0.1398 ms</strong></p>
+<li class='doc-li'><strong>Query 2 (Индексгүй асуулга: `specs.weight_kg &lt;= 2.0`):</strong></li>
+<p>  - Төлөв: <code>COLLSCAN</code> (Бүх цуглуулгын баримтуудыг нэг бүрчлэн уншсан)</p>
+<p>  - Ажилласан хугацаа: <strong>0.1130 ms</strong> <em>(жижиг өгөгдөл дээр бага харагдах боловч сая баримттай үед COLLSCAN нь хэдэн зуун секунд зарцуулдаг).</em></p>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>6. Системийн консол ажиллагааны дэлгэцийн бүртгэл (Execution Proof)</h2>
+<br/>
+<p>Системийн <code>python main.py</code> файлыг ажиллуулахад үүссэн албан ёсны консол гаралт (<code>test_run.log</code>-оос авсан хэсэг):</p>
+<br/>
+<pre><code>
+================================================================================
+      NoSQL ӨГӨГДЛИЙН САНГИЙН ТУРШИЛТЫН ТӨСӨЛ — СИСТЕМИЙН АЖИЛЛАГАА
+      Сэдэв: E-Commerce цахим худалдааны өгөгдлийн загварчлал ба MongoDB
+================================================================================
+
+[ҮЕ ШАТ 1] Өгөгдлийн сантай холбогдох болон орчин бэлтгэх...
+[INFO] Initialized Embedded MongoDB Engine (Pure Python, Full API Compatible).
+
+[ҮЕ ШАТ 2] Анхны өгөгдөл бэлтгэх, ачаалах (Seeding)...
+[OK] Seeded 35 product documents into &#x27;products&#x27; collection.
+[OK] Seeded 5 order documents into &#x27;orders&#x27; collection.
+[OK] Created indexes: idx_category_price, idx_brand, idx_customer_id.
+ -&gt; Баталгаажуулалт: Нийт 35 бүтээгдэхүүн, 5 захиалга амжилттай үүслээ.
+
+================================================================================
+[ҮЕ ШАТ 3] CRUD ҮЙЛДЛҮҮДИЙН ТУРШИЛТ
+================================================================================
+
+&gt;&gt;&gt; 3.1 CREATE: Шинэ баримт нэмэх (insert_one)
+[CREATE] Product added with ID: &#x27;PROD-036&#x27; | Name: Apple Vision Pro 512GB Spatial Computer
+
+&gt;&gt;&gt; 3.2 READ: Төрөл бүрийн шүүлтүүрээр хайх
+
+ A) ID-аар хайх:
+[READ BY ID] Found: Apple Vision Pro 512GB Spatial Computer ($3699.0) - Brand: Apple
+
+ B) Ангилал ба Үнийн хязгаараар хайх ($gte, $lte):
+[READ FILTER] Found 2 items in Category: &#x27;Computers &amp; Laptops&#x27; between $1000 and $2600:
+   -&gt; ASUS ROG Zephyrus G14 (2024) | Price: $1999.0 | Stock: 15
+   -&gt; Dell XPS 15 9530 OLED | Price: $2499.0 | Stock: 12
+
+ C) Бүтцийн доторх Nested талбараар хайх (specs.ram_gb &gt;= 32):
+[READ NESTED] Products with specs.ram_gb &gt;= 32GB (3 items found):
+   * Apple MacBook Pro 16 M3 Max (Apple) - RAM: 48GB | CPU: Apple M3 Max (16-core CPU, 40-core GPU)
+   * Dell XPS 15 9530 OLED (Dell) - RAM: 32GB | CPU: Intel Core i9-13900H
+   * Lenovo Legion Pro 7i Gen 8 (Lenovo) - RAM: 32GB | CPU: Intel Core i9-13900HX
+
+ D) Массивын түлхүүр үгээр хайх (tags = &#x27;developer&#x27;):
+[READ TAG] Products tagged with &#x27;developer&#x27; (1 items found):
+   # Keychron Q1 Pro Wireless Custom Mechanical Keyboard | Brand: Keychron | Price: $199.0
+
+&gt;&gt;&gt; 3.3 UPDATE: Талбар шинэчлэх ($set), тоолуур өөрчлөх ($inc), массив нэмэх ($push)
+
+ A) Үнэ болон үлдэгдэл шинэчлэх:
+[UPDATE] Product &#x27;PROD-036&#x27; modified: 1 doc(s) updated. (Price set to $3499.0, Stock delta: -1)
+
+ B) Хэрэглэгчийн сэтгэгдэл нэмэх ($push) ба үнэлгээг дахин тооцоолох:
+[UPDATE EMBEDDED] Added review by &#x27;Наранбаатар&#x27; to &#x27;Apple Vision Pro 512GB Spatial Computer&#x27;. New Rating: 4.9 (2 reviews).
+
+&gt;&gt;&gt; 3.4 DELETE: Баримт устгах
+[CREATE] Product added with ID: &#x27;PROD-TEMP-999&#x27; | Name: Temporary Test Item
+ Устгахын өмнөх нийт тоо: 37
+[DELETE ONE] Product &#x27;PROD-TEMP-999&#x27; deleted: 1 document removed.
+ Устгасны дараах нийт тоо: 36
+</code></pre>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h1 class='title-h1'>ГУРАВДУГААР ХЭСЭГ: ДҮН ШИНЖИЛГЭЭ БА ХАРЬЦУУЛАЛТ</h1>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>1. MongoDB-ийн SQL (RDBMS)-тэй харьцуулсан давуу тал</h2>
+<br/>
+<p>1. <strong>Бүтцийн дээд зэргийн уян хатан байдал (Poly-morphic Data):</strong> Электрон барааны дэлгүүрт зөөврийн компьютер, ухаалаг зурагт, тоос сорогч, гар утас зэрэг өөр өөр ангиллын бараанууд огт өөр техникийн үзүүлэлттэй байдаг. RDBMS дээр үүнийг шийдэхийн тулд 5-6 дэд хүснэгт үүсгэх эсвэл олон хоосон (NULL) багана ашигладаг бол MongoDB-д ганц <code>specs</code> дэд объект дотор өөр өөр талбартайгаар маш цэвэрхэн хадгалж чадсан.</p>
+<p>2. <strong>Хөгжүүлэлтийн хурд ба Шууд нийцэл (JSON / OOP):</strong> Python хэлний толь бичиг (Dictionary) болон объектууд BSON/JSON баримттай 100% нийцэж байсан тул хүснэгт хоорондын ORM хөрвүүлэлт хийх шаардлагагүй, код маш товч бөгөөд ойлгомжтой болсон.</p>
+<p>3. <strong>Уншилтын гүйцэтгэл (No Joins):</strong> Бүтээгдэхүүний дэлгэрэнгүй хуудсыг нээхэд бүтээгдэхүүний мэдээлэл, үзүүлэлтүүд, үнэлгээний нэгтгэл, сүүлийн үеийн сэтгэгдлүүдийг ганцхан <code>find_one</code> үйлдлээр дискнээс нэгэн зэрэг уншиж авсан нь RDBMS-ийн 3-4 хүснэгт холбосон <code>JOIN</code>-оос хэд дахин хурдан байв.</p>
+<br/>
+<h2 class='title-h2'>2. Практикт ажиглагдсан сул тал, сорилтууд</h2>
+<br/>
+<p>1. <strong>Өгөгдлийн давхардал (Data Denormalization Overhead):</strong> Захиалгын баримт дотор бүтээгдэхүүний нэр, үнийг тухайн агшны snapshot байдлаар хуулбарлан хадгалсан. Хэрэв барааны нэрэнд алдаа гарч засахаар болбол хуучин захиалгуудад хуулбарлагдсан өгөгдлийг нэгбүрчлэн засах уу эсвэл үлдээх үү гэдэг шийдвэр шаардагддаг.</p>
+<p>2. <strong>Баримтын дээд хэмжээний хязгаар (16MB BSON Limit):</strong> Хэрэв маш олон мянган сэтгэгдэлтэй бараа байвал бүх сэтгэгдлийг нэг баримтад хадгалах нь 16MB-ийн хязгаарт тулах эрсдэлтэй. Иймд маш олон сэтгэгдэлтэй үед Referencing загвар руу шилжих хэрэгцээ гардаг.</p>
+<p>3. <strong>Хүснэгтийн бүрэн бүтэн байдлын хяналт програм дээр шилжих нь:</strong> RDBMS нь Foreign Key, Check Constraint-ийг өгөгдлийн сан өөрөө хатуу хамгаалдаг бол NoSQL дээр буруу бүтэцтэй өгөгдөл орохоос сэргийлэх шалгалтыг аппликейшний код (эсвэл JSON Schema Validator) дээр хариуцах шаардлагатай.</p>
+<br/>
+<h2 class='title-h2'>3. Өөр хэрэгцээнд илүү тохирох NoSQL төрлүүдийн сонголт</h2>
+<br/>
+<li class='doc-li'><strong>Хэрэглэгчийн сагс болон нэвтрэлтийн сессэд:</strong> <strong>Redis (Key-Value)</strong> хамгийн тохиромжтой. Учир нь санах ойд (RAM) ажилладаг тул хоцролтгүй ($&lt;1$ ms) ажиллах бөгөөд TTL (Time-To-Live) тохируулан 24 цагийн дараа өөрөө устдаг болгож болно.</li>
+<li class='doc-li'><strong>Хэрэглэгчийн үзсэн түүх, товшилтын лог (Clickstream data):</strong> <strong>Apache Cassandra (Wide-Column)</strong> илүү тохиромжтой. Секундэд хэдэн зуун мянган товшилтын цагийн цуваа өгөгдлийг диск рүү тасралтгүй өндөр хурдаар бичих чадвартай.</li>
+<li class='doc-li'><strong>Худалдан авалтын зөвлөмж ба найзуудын харилцаанд:</strong> <strong>Neo4j (Graph Database)</strong> хамгийн тохиромжтой. &quot;Энэ барааг авсан хүмүүс өөр ямар бараа авсан бэ?&quot; гэдэг 3-4 шатлалт хамаарлыг график замаар олоход Neo4j маш өндөр үр дүнтэй.</li>
+<br/>
+<h2 class='title-h2'>4. Судалгаа ба туршилтын явцад олж авсан хамгийн чухал ойлголтууд</h2>
+<br/>
+<li class='doc-li'><strong>&quot;Query-First Design&quot; буюу Асуулгад нийцүүлэн загварчлах:</strong> NoSQL-д нормальчлалын дүрэм баримтлахаас илүүтэйгээр *аппликейшн өгөгдлийг ямар байдлаар унших вэ?* гэдэгт тулгуурлан өгөгдлийн бүтцээ зохиодог нь хамгийн чухал сургамж байв.</li>
+<li class='doc-li'><strong>CAP теоремын амьдрал дээрх үнэ цэнэ:</strong> Бүхнийг чаддаг төгс өгөгдлийн сан гэж байдаггүй. Өндөр бэлэн байдал (Availability) эсвэл Үнэн зөв байдал (Consistency)-ийн аль нэгийг бизнес шаардлагадаа нийцүүлэн сонгох ёстойг ойлгов.</li>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h1 class='title-h1'>ДӨРӨВДҮГЭЭР ХЭСЭГ: ДҮГНЭЛТ БА САНАЛ ЗӨВЛӨМЖ</h1>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h2 class='title-h2'>1. Ерөнхий дүгнэлт</h2>
+<br/>
+<p>Энэхүү судалгаа болон практик ажлаар NoSQL өгөгдлийн сангуудын онолын үндэс, RDBMS-ээс ялгарах гол давуу болон сул талууд, CAP теорем ба PACELC өргөтгөлийн практик ач холбогдол, 4 үндсэн төрлийн системийн архитектурыг гүнзгийрүүлэн судлав.</p>
+<br/>
+<p>Туршилтын төслийн хүрээнд MongoDB өгөгдлийн сан дээр бодит цахим худалдааны өгөгдлийн загварыг амжилттай хэрэгжүүлж, 35 баримт бүхий бүтээгдэхүүний каталог, хэрэглэгчийн үнэлгээ, сагс, захиалгын урсгалыг бий болголоо. Бүх CRUD үйлдлүүд, Aggregation Pipeline, Текст хайлт, Индексжүүлэлтийн гүйцэтгэлийг туршин шалгаж, системийн ажиллагааг амжилттай баталгаажуулав.</p>
+<br/>
+<h2 class='title-h2'>2. Ирээдүйд өргөжүүлэх боломж</h2>
+<br/>
+<p>Төслийг бодит амьдрал дээр илүү өргөжүүлэн дараах нэмэлтүүдийг хийх бүрэн боломжтой:</p>
+<p>1. <strong>Multi-Document ACID Transactions:</strong> MongoDB 4.0+ хувилбараас эхлэн дэмжигдсэн олон баримт дамнасан транзакцыг ашиглан барааны үлдэгдэл хасах болон төлбөр баталгаажуулах үйлдлийг нэгтгэх.</p>
+<p>2. <strong>Geospatial Queries (Байршлын хайлт):</strong> Хүргэлтийн хаяг болон дэлгүүрийн салбаруудыг <code>2dsphere</code> индекс ашиглан хэрэглэгчид хамгийн ойр байгаа салбараас барааг хүргэх тооцоолол хийх.</p>
+<p>3. <strong>Change Streams (Бодит хугацааны мэдэгдэл):</strong> Захиалгын төлөв өөрчлөгдөх үед WebSocket-ээр хэрэглэгчийн утас руу push notification илгээх.</p>
+<br/>
+<h2 class='title-h2'>3. Бодит үйлдвэрлэлийн системд нэвтрүүлэх зөвлөмж</h2>
+<br/>
+<p>Бодит үйлдвэрлэлийн (Production) түвшинд нэвтрүүлэхэд дараах архитектурын зөвлөмжийг дэвшүүлж байна:</p>
+<li class='doc-li'><strong>Polyglot Persistence (Хосолмол хадгалалт):</strong> Бүх зүйлийг ганцхан MongoDB дээр даатгах бус, өгөгдлийн шинж чанарт тохируулан: Үндсэн каталогийг <strong>MongoDB</strong>, хурдан кэшийг <strong>Redis</strong>, санхүүгийн нягтлан бодох бүртгэлийг <strong>PostgreSQL</strong>, лог аналитикийг <strong>Cassandra</strong> зэргээр хослуулан ашиглах нь хамгийн өндөр найдвартай байдлыг авчирна.</li>
+<li class='doc-li'><strong>Replica Set ба Sharding-ийг эртнээс төлөвлөх:</strong> Системийн хэрэглэгчийн тоо 100 мянга давж өсөх үед Shard Key-ийг (жишээ нь `category` эсвэл `created_at`-ийн нийлмэл түлхүүр) зөв сонгох нь өгөгдөл тэгш хуваарилагдах гол үндэс болно.</li>
+<br/>
+<hr class='page-divider'/>
+<br/>
+<h1 class='title-h1'>АШИГЛАСАН ЭХ СУРВАЛЖ, НОМ ЗҮЙ</h1>
+<br/>
+<p>1. <strong>Brewer, E. A.</strong> (2000). <em>Towards Robust Distributed Systems.</em> Proceedings of the 19th Annual ACM Symposium on Principles of Distributed Computing (PODC).</p>
+<p>2. <strong>Gilbert, S., &amp; Lynch, N.</strong> (2002). <em>Brewer&#x27;s conjecture and the feasibility of consistent, available, partition-tolerant web services.</em> ACM SIGACT News, 33(2), 51-59.</p>
+<p>3. <strong>Abadi, D. J.</strong> (2012). <em>Consistency Tradeoffs in Modern Distributed Database System Design: CAP is Only Part of the Story.</em> Computer, 45(2), 37-42.</p>
+<p>4. <strong>Kleppmann, M.</strong> (2017). <em>Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems.</em> O&#x27;Reilly Media.</p>
+<p>5. <strong>Chodorow, K.</strong> (2013). <em>MongoDB: The Definitive Guide: Powerful and Scalable Data Storage (2nd ed.).</em> O&#x27;Reilly Media.</p>
+<p>6. <strong>Lakshman, A., &amp; Malik, P.</strong> (2010). <em>Cassandra: A Decentralized Structured Storage System.</em> ACM SIGOPS Operating Systems Review, 44(2), 35-40.</p>
+<p>7. <strong>DeCandia, G., et al.</strong> (2007). <em>Dynamo: Amazon&#x27;s Highly Available Key-value Store.</em> Proceedings of the 21st ACM SIGOPS Symposium on Operating Systems Principles, 205-220.</p>
+<p>8. <strong>Bronson, N., et al.</strong> (2013). <em>TAO: Facebook’s Distributed Data Store for the Social Graph.</em> USENIX Annual Technical Conference (ATC).</p>
+<p>9. <strong>MongoDB Inc.</strong> (2024). <em>MongoDB Documentation: Data Modeling, Indexing, and Aggregation Pipeline.</em> https://www.mongodb.com/docs/</p>
+
+</body>
+</html>

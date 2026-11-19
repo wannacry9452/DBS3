@@ -1,0 +1,1508 @@
+[
+  {
+    "product_id": "PROD-001",
+    "name": "Apple MacBook Pro 16 M3 Max",
+    "slug": "macbook-pro-16-m3-max",
+    "category": "Computers & Laptops",
+    "sub_category": "Laptops",
+    "brand": "Apple",
+    "price": 3499.00,
+    "discount_price": 3299.00,
+    "stock": 18,
+    "status": "in_stock",
+    "specs": {
+      "processor": "Apple M3 Max (16-core CPU, 40-core GPU)",
+      "ram_gb": 48,
+      "storage": "1TB SSD",
+      "display_inch": 16.2,
+      "battery_hours": 22,
+      "weight_kg": 2.16,
+      "color": "Space Black"
+    },
+    "tags": ["laptop", "apple", "m3", "workstation", "retina", "macos"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 4
+    },
+    "reviews": [
+      {
+        "review_id": "REV-101",
+        "user_name": "Билгүүн",
+        "rating": 5,
+        "comment": "Хөгжүүлэлт хийхэд гайхалтай хурдан, батарей маш сайн барьж байна.",
+        "date": "2024-01-15T10:30:00Z"
+      },
+      {
+        "review_id": "REV-102",
+        "user_name": "Анужин",
+        "rating": 5,
+        "comment": "Дэлгэцийн өнгө дүрслэл, дуугаралт үнэхээр өндөр түвшинд байна.",
+        "date": "2024-01-20T14:22:00Z"
+      },
+      {
+        "review_id": "REV-103",
+        "user_name": "Тэмүүлэн",
+        "rating": 5,
+        "comment": "3D rendering, видео эвлүүлэгт ямар ч гацалтгүй ажиллаж байна.",
+        "date": "2024-02-01T09:15:00Z"
+      },
+      {
+        "review_id": "REV-104",
+        "user_name": "Дөлгөөн",
+        "rating": 4.5,
+        "comment": "Үнэ бага зэрэг өндөр ч үзүүлэлт нь үнэдээ бүрэн нийцнэ.",
+        "date": "2024-02-10T16:45:00Z"
+      }
+    ],
+    "created_at": "2023-11-10T08:00:00Z"
+  },
+  {
+    "product_id": "PROD-002",
+    "name": "Dell XPS 15 9530 OLED",
+    "slug": "dell-xps-15-oled",
+    "category": "Computers & Laptops",
+    "sub_category": "Laptops",
+    "brand": "Dell",
+    "price": 2499.00,
+    "discount_price": 2299.00,
+    "stock": 12,
+    "status": "in_stock",
+    "specs": {
+      "processor": "Intel Core i9-13900H",
+      "gpu": "NVIDIA GeForce RTX 4070 8GB",
+      "ram_gb": 32,
+      "storage": "1TB NVMe SSD",
+      "display_inch": 15.6,
+      "display_type": "3.5K OLED Touch",
+      "weight_kg": 1.92,
+      "color": "Platinum Silver"
+    },
+    "tags": ["laptop", "dell", "xps", "oled", "windows", "creators"],
+    "rating_summary": {
+      "average_rating": 4.6,
+      "review_count": 3
+    },
+    "reviews": [
+      {
+        "review_id": "REV-105",
+        "user_name": "Гантулга",
+        "rating": 5,
+        "comment": "OLED дэлгэц нь үнэхээр тансаг харагддаг.",
+        "date": "2024-01-12T11:00:00Z"
+      },
+      {
+        "review_id": "REV-106",
+        "user_name": "Баярмаа",
+        "rating": 4,
+        "comment": "Маш сайн зөөврийн компьютер, гэхдээ ачааллын үед сэнс нь чанга дуугардаг.",
+        "date": "2024-02-05T13:40:00Z"
+      },
+      {
+        "review_id": "REV-107",
+        "user_name": "Оргил",
+        "rating": 5,
+        "comment": "Програмчлал болон график дизайнд төгс сонголт.",
+        "date": "2024-02-14T18:10:00Z"
+      }
+    ],
+    "created_at": "2023-11-15T09:00:00Z"
+  },
+  {
+    "product_id": "PROD-003",
+    "name": "Lenovo Legion Pro 7i Gen 8",
+    "slug": "lenovo-legion-pro-7i",
+    "category": "Computers & Laptops",
+    "sub_category": "Gaming Laptops",
+    "brand": "Lenovo",
+    "price": 2799.00,
+    "discount_price": 2599.00,
+    "stock": 8,
+    "status": "in_stock",
+    "specs": {
+      "processor": "Intel Core i9-13900HX",
+      "gpu": "NVIDIA GeForce RTX 4080 12GB",
+      "ram_gb": 32,
+      "storage": "2TB NVMe SSD",
+      "display_inch": 16.0,
+      "refresh_rate_hz": 240,
+      "weight_kg": 2.8,
+      "color": "Onyx Grey"
+    },
+    "tags": ["gaming", "lenovo", "legion", "rtx4080", "high-performance"],
+    "rating_summary": {
+      "average_rating": 4.8,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-108",
+        "user_name": "Мөнх-Эрдэнэ",
+        "rating": 5,
+        "comment": "Бүх тоглоомыг хамгийн дээд тохиргоон дээр 100+ FPS-тэй тоглуулж байна.",
+        "date": "2024-01-25T20:15:00Z"
+      },
+      {
+        "review_id": "REV-109",
+        "user_name": "Золбоо",
+        "rating": 4.5,
+        "comment": "Хөргөлтийн систем нь үнэхээр хүчирхэг байна.",
+        "date": "2024-02-18T10:05:00Z"
+      }
+    ],
+    "created_at": "2023-12-01T12:00:00Z"
+  },
+  {
+    "product_id": "PROD-004",
+    "name": "ASUS ROG Zephyrus G14 (2024)",
+    "slug": "asus-rog-zephyrus-g14",
+    "category": "Computers & Laptops",
+    "sub_category": "Gaming Laptops",
+    "brand": "ASUS",
+    "price": 1999.00,
+    "discount_price": 1849.00,
+    "stock": 15,
+    "status": "in_stock",
+    "specs": {
+      "processor": "AMD Ryzen 9 8945HS",
+      "gpu": "NVIDIA GeForce RTX 4060 8GB",
+      "ram_gb": 16,
+      "storage": "1TB SSD",
+      "display_inch": 14.0,
+      "display_type": "3K OLED 120Hz",
+      "weight_kg": 1.5,
+      "color": "Eclipse Gray"
+    },
+    "tags": ["asus", "rog", "gaming", "portable", "oled", "compact"],
+    "rating_summary": {
+      "average_rating": 4.7,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-110",
+        "user_name": "Хатанбаатар",
+        "rating": 5,
+        "comment": "14 инчийн хэмжээтэй гэхэд асар хүчирхэг, авч явахад маш хөнгөн.",
+        "date": "2024-02-02T15:30:00Z"
+      },
+      {
+        "review_id": "REV-111",
+        "user_name": "Энхжин",
+        "rating": 4.5,
+        "comment": "Хөнгөн цагаан гадаргуу, дуугаралт, товчлуурын мэдрэмж төгс.",
+        "date": "2024-02-22T08:45:00Z"
+      }
+    ],
+    "created_at": "2024-01-05T08:00:00Z"
+  },
+  {
+    "product_id": "PROD-005",
+    "name": "Apple iPhone 15 Pro Max 256GB",
+    "slug": "iphone-15-pro-max-256",
+    "category": "Smartphones & Tablets",
+    "sub_category": "Smartphones",
+    "brand": "Apple",
+    "price": 1199.00,
+    "discount_price": 1149.00,
+    "stock": 25,
+    "status": "in_stock",
+    "specs": {
+      "processor": "Apple A17 Pro (3nm)",
+      "ram_gb": 8,
+      "storage": "256GB NVMe",
+      "display_inch": 6.7,
+      "display_type": "Super Retina XDR OLED 120Hz",
+      "camera_main_mp": 48,
+      "telephoto_zoom": "5x optical",
+      "connector": "USB-C 3.0",
+      "weight_g": 221,
+      "material": "Titanium"
+    },
+    "tags": ["smartphone", "apple", "iphone", "titanium", "a17pro", "5g"],
+    "rating_summary": {
+      "average_rating": 4.8,
+      "review_count": 3
+    },
+    "reviews": [
+      {
+        "review_id": "REV-112",
+        "user_name": "Сарнай",
+        "rating": 5,
+        "comment": "Титан хүрээтэй учир өмнөх загваруудаас хамаагүй хөнгөн санагдлаа.",
+        "date": "2024-01-10T14:10:00Z"
+      },
+      {
+        "review_id": "REV-113",
+        "user_name": "Болд",
+        "rating": 5,
+        "comment": "Камерын 5 дахин оптик томруулалт үнэхээр гайхалтай зураг авдаг.",
+        "date": "2024-01-18T19:30:00Z"
+      },
+      {
+        "review_id": "REV-114",
+        "user_name": "Эрдэнэ",
+        "rating": 4.5,
+        "comment": "USB-C холбогчтой болсон нь маш их таалагдсан.",
+        "date": "2024-02-12T11:20:00Z"
+      }
+    ],
+    "created_at": "2023-09-25T10:00:00Z"
+  },
+  {
+    "product_id": "PROD-006",
+    "name": "Samsung Galaxy S24 Ultra 512GB",
+    "slug": "samsung-galaxy-s24-ultra",
+    "category": "Smartphones & Tablets",
+    "sub_category": "Smartphones",
+    "brand": "Samsung",
+    "price": 1419.00,
+    "discount_price": 1299.00,
+    "stock": 20,
+    "status": "in_stock",
+    "specs": {
+      "processor": "Qualcomm Snapdragon 8 Gen 3",
+      "ram_gb": 12,
+      "storage": "512GB UFS 4.0",
+      "display_inch": 6.8,
+      "display_type": "Dynamic LTPO AMOLED 2X 120Hz",
+      "stylus": "Integrated S-Pen",
+      "camera_main_mp": 200,
+      "battery_mah": 5000,
+      "ai_features": ["Live Translate", "Circle to Search", "Note Assist"]
+    },
+    "tags": ["samsung", "galaxy", "android", "s-pen", "ai", "200mp", "5g"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-115",
+        "user_name": "Алтансүх",
+        "rating": 5,
+        "comment": "Galaxy AI функцууд ажлыг үнэхээр хөнгөвчилж байна. S-Pen төгс.",
+        "date": "2024-02-05T09:40:00Z"
+      },
+      {
+        "review_id": "REV-116",
+        "user_name": "Ундрах",
+        "rating": 4.8,
+        "comment": "200МП камерын нарийвчлал болон батерей үнэхээр удаан ажиллаж байна.",
+        "date": "2024-02-20T17:15:00Z"
+      }
+    ],
+    "created_at": "2024-01-20T11:00:00Z"
+  },
+  {
+    "product_id": "PROD-007",
+    "name": "Google Pixel 8 Pro 128GB",
+    "slug": "google-pixel-8-pro",
+    "category": "Smartphones & Tablets",
+    "sub_category": "Smartphones",
+    "brand": "Google",
+    "price": 999.00,
+    "discount_price": 899.00,
+    "stock": 14,
+    "status": "in_stock",
+    "specs": {
+      "processor": "Google Tensor G3",
+      "ram_gb": 12,
+      "storage": "128GB UFS 3.1",
+      "display_inch": 6.7,
+      "camera_main_mp": 50,
+      "thermometer": true,
+      "os_support_years": 7
+    },
+    "tags": ["google", "pixel", "android", "pure-android", "computational-photography"],
+    "rating_summary": {
+      "average_rating": 4.5,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-117",
+        "user_name": "Төрболд",
+        "rating": 5,
+        "comment": "Камерын хиймэл оюуны боловсруулалт дэлхийд шилдэг нь.",
+        "date": "2024-01-14T12:00:00Z"
+      },
+      {
+        "review_id": "REV-118",
+        "user_name": "Хулан",
+        "rating": 4,
+        "comment": "7 жилийн үйлдлийн системийн шинэчлэл амласан нь маш найдвартай.",
+        "date": "2024-02-11T16:00:00Z"
+      }
+    ],
+    "created_at": "2023-10-12T10:00:00Z"
+  },
+  {
+    "product_id": "PROD-008",
+    "name": "Apple iPad Pro 12.9 M2 256GB WiFi",
+    "slug": "ipad-pro-12-9-m2",
+    "category": "Smartphones & Tablets",
+    "sub_category": "Tablets",
+    "brand": "Apple",
+    "price": 1099.00,
+    "discount_price": 1029.00,
+    "stock": 10,
+    "status": "in_stock",
+    "specs": {
+      "processor": "Apple M2 (8-core CPU, 10-core GPU)",
+      "ram_gb": 8,
+      "storage": "256GB",
+      "display_inch": 12.9,
+      "display_type": "Liquid Retina XDR Mini-LED",
+      "accessory_support": ["Apple Pencil 2", "Magic Keyboard"]
+    },
+    "tags": ["tablet", "apple", "ipad", "m2", "artist", "drawing"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-119",
+        "user_name": "Цэлмэг",
+        "rating": 5,
+        "comment": "Зураг зурах, дижитал арт хийхэд Apple Pencil-тэй төгс зохицдог.",
+        "date": "2024-01-22T13:30:00Z"
+      },
+      {
+        "review_id": "REV-120",
+        "user_name": "Түвшин",
+        "rating": 4.8,
+        "comment": "Mini-LED дэлгэцийн тодрол, харанхуй хэсгийн хар өнгө гайхалтай.",
+        "date": "2024-02-08T15:20:00Z"
+      }
+    ],
+    "created_at": "2023-10-05T09:00:00Z"
+  },
+  {
+    "product_id": "PROD-009",
+    "name": "Sony WH-1000XM5 Wireless Headphones",
+    "slug": "sony-wh-1000xm5",
+    "category": "Audio & Sound",
+    "sub_category": "Over-Ear Headphones",
+    "brand": "Sony",
+    "price": 399.99,
+    "discount_price": 348.00,
+    "stock": 35,
+    "status": "in_stock",
+    "specs": {
+      "type": "Over-ear Closed back",
+      "noise_cancelling": "Industry-leading ANC (Dual processor)",
+      "battery_hours": 30,
+      "quick_charge": "3 min for 3 hours",
+      "codecs": ["LDAC", "AAC", "SBC"],
+      "weight_g": 250,
+      "multipoint_bluetooth": true
+    },
+    "tags": ["audio", "sony", "anc", "wireless", "bluetooth", "audiophile"],
+    "rating_summary": {
+      "average_rating": 4.8,
+      "review_count": 3
+    },
+    "reviews": [
+      {
+        "review_id": "REV-121",
+        "user_name": "Нарантуяа",
+        "rating": 5,
+        "comment": "Дуу чимээ тусгаарлалт нь онгоцонд болон оффист суухад бурхан шиг амар тайван болгодог.",
+        "date": "2024-01-08T10:15:00Z"
+      },
+      {
+        "review_id": "REV-122",
+        "user_name": "Баярсайхан",
+        "rating": 5,
+        "comment": "Чихэвчний хөнгөн байдал болон хөөсөн зөөлөвч нь өдөржин зүүхэд ч өвтгөхгүй.",
+        "date": "2024-01-29T18:00:00Z"
+      },
+      {
+        "review_id": "REV-123",
+        "user_name": "Энэрэл",
+        "rating": 4.5,
+        "comment": "Микрофон ярианы үед гадны дууг сайн дардаг.",
+        "date": "2024-02-15T11:45:00Z"
+      }
+    ],
+    "created_at": "2023-08-20T10:00:00Z"
+  },
+  {
+    "product_id": "PROD-010",
+    "name": "Apple AirPods Pro (2nd Gen, USB-C)",
+    "slug": "airpods-pro-2-usb-c",
+    "category": "Audio & Sound",
+    "sub_category": "In-Ear Earphones",
+    "brand": "Apple",
+    "price": 249.00,
+    "discount_price": 199.00,
+    "stock": 50,
+    "status": "in_stock",
+    "specs": {
+      "chip": "Apple H2",
+      "noise_cancelling": "Active Noise Cancellation & Transparency Mode",
+      "spatial_audio": "Personalized Spatial Audio with dynamic head tracking",
+      "water_resistance": "IP54 dust, sweat, and water",
+      "charging_case": "MagSafe (USB-C) with speaker and lanyard loop",
+      "battery_hours": 6
+    },
+    "tags": ["audio", "apple", "airpods", "tws", "anc", "spatial-audio"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 3
+    },
+    "reviews": [
+      {
+        "review_id": "REV-124",
+        "user_name": "Мөнгөнсүх",
+        "rating": 5,
+        "comment": "Apple төхөөрөмжүүдийн хооронд шууд шилжиж холбогддог нь хамгийн аятайхан.",
+        "date": "2024-01-12T09:30:00Z"
+      },
+      {
+        "review_id": "REV-125",
+        "user_name": "Номин",
+        "rating": 5,
+        "comment": "Adaptive Audio горим үнэхээр ухаалаг ажилладаг.",
+        "date": "2024-01-25T14:10:00Z"
+      },
+      {
+        "review_id": "REV-126",
+        "user_name": "Чингүүн",
+        "rating": 4.7,
+        "comment": "Басс болон дууны цэвэр тунгалаг байдал сайжирсан байна.",
+        "date": "2024-02-17T20:25:00Z"
+      }
+    ],
+    "created_at": "2023-09-22T08:00:00Z"
+  },
+  {
+    "product_id": "PROD-011",
+    "name": "Bose QuietComfort Ultra Headphones",
+    "slug": "bose-qc-ultra",
+    "category": "Audio & Sound",
+    "sub_category": "Over-Ear Headphones",
+    "brand": "Bose",
+    "price": 429.00,
+    "discount_price": 379.00,
+    "stock": 16,
+    "status": "in_stock",
+    "specs": {
+      "type": "Over-ear",
+      "spatial_audio": "Bose Immersive Audio",
+      "modes": ["Quiet", "Aware", "Immersion"],
+      "battery_hours": 24,
+      "weight_g": 252,
+      "color": "Black / White Smoke"
+    },
+    "tags": ["audio", "bose", "comfort", "anc", "premium-sound"],
+    "rating_summary": {
+      "average_rating": 4.6,
+      "review_count": 1
+    },
+    "reviews": [
+      {
+        "review_id": "REV-127",
+        "user_name": "Баяржаргал",
+        "rating": 4.6,
+        "comment": "Эвтэйхэн тухтай байдлаараа Bose-ийг гүйцэх чихэвч ховор.",
+        "date": "2024-02-04T16:00:00Z"
+      }
+    ],
+    "created_at": "2023-11-05T12:00:00Z"
+  },
+  {
+    "product_id": "PROD-012",
+    "name": "Sony PlayStation 5 Slim Digital Edition",
+    "slug": "sony-ps5-slim-digital",
+    "category": "Gaming & Consoles",
+    "sub_category": "Consoles",
+    "brand": "Sony",
+    "price": 449.99,
+    "discount_price": 399.99,
+    "stock": 22,
+    "status": "in_stock",
+    "specs": {
+      "cpu": "x86-64-AMD Ryzen Zen 2 (8 Cores / 16 Threads)",
+      "gpu": "AMD Radeon RDNA 2-based graphics engine",
+      "storage": "1TB Custom NVMe SSD",
+      "video_output": "4K 120Hz, 8K TVs, VRR",
+      "audio": "Tempest 3D AudioTech",
+      "controller": "DualSense Wireless Controller included"
+    },
+    "tags": ["gaming", "console", "playstation", "ps5", "4k-gaming", "dualsense"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 3
+    },
+    "reviews": [
+      {
+        "review_id": "REV-128",
+        "user_name": "Тэмүүжин",
+        "rating": 5,
+        "comment": "SSD ачаалалт нь секундын дотор болдог, DualSense триггер үнэхээр бодит мэдрэмж өгдөг.",
+        "date": "2024-01-16T17:40:00Z"
+      },
+      {
+        "review_id": "REV-129",
+        "user_name": "Эрхэмбаяр",
+        "rating": 5,
+        "comment": "Өмнөх хувилбараа бодвол хамаагүй жижигхэн, авсаархан болжээ.",
+        "date": "2024-02-01T21:10:00Z"
+      },
+      {
+        "review_id": "REV-130",
+        "user_name": "Очир",
+        "rating": 4.7,
+        "comment": "График болон хурд төгс, тоглоомын сонголт арвин.",
+        "date": "2024-02-19T14:35:00Z"
+      }
+    ],
+    "created_at": "2023-11-20T10:00:00Z"
+  },
+  {
+    "product_id": "PROD-013",
+    "name": "Nintendo Switch OLED Model",
+    "slug": "nintendo-switch-oled",
+    "category": "Gaming & Consoles",
+    "sub_category": "Handheld Consoles",
+    "brand": "Nintendo",
+    "price": 349.99,
+    "discount_price": 329.99,
+    "stock": 19,
+    "status": "in_stock",
+    "specs": {
+      "screen": "7-inch OLED multi-touch screen",
+      "resolution": "1280x720 (Handheld) / 1080p (TV Dock)",
+      "storage": "64GB internal + MicroSD slot",
+      "battery_hours": "4.5 to 9 hours",
+      "stand": "Wide adjustable tabletop stand",
+      "lan_port": "Wired LAN port in dock"
+    },
+    "tags": ["nintendo", "switch", "handheld", "zelda", "mario", "portable-gaming"],
+    "rating_summary": {
+      "average_rating": 4.7,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-131",
+        "user_name": "Уянга",
+        "rating": 5,
+        "comment": "Хүүхэд болон гэр бүлээрээ хамт тоглоход хамгийн тохиромжтой консол.",
+        "date": "2024-01-19T18:25:00Z"
+      },
+      {
+        "review_id": "REV-132",
+        "user_name": "Ганзориг",
+        "rating": 4.5,
+        "comment": "OLED дэлгэцийн өнгө тод, Zelda тоглоход сэтгэл ханамж өндөр байна.",
+        "date": "2024-02-13T12:50:00Z"
+      }
+    ],
+    "created_at": "2023-10-15T11:00:00Z"
+  },
+  {
+    "product_id": "PROD-014",
+    "name": "LG C3 65-inch 4K OLED evo Smart TV",
+    "slug": "lg-c3-65-oled-tv",
+    "category": "TV & Home Entertainment",
+    "sub_category": "Smart TVs",
+    "brand": "LG",
+    "price": 1899.99,
+    "discount_price": 1599.99,
+    "stock": 9,
+    "status": "in_stock",
+    "specs": {
+      "screen_size_inch": 65,
+      "panel": "4K OLED evo Self-lit Pixels",
+      "refresh_rate_hz": 120,
+      "processor": "a9 AI Processor Gen6",
+      "gaming_features": ["G-Sync", "FreeSync", "VRR", "4x HDMI 2.1"],
+      "hdr": ["Dolby Vision", "HDR10", "HLG"],
+      "smart_os": "webOS 23"
+    },
+    "tags": ["tv", "lg", "oled", "4k", "gaming-tv", "cinema", "smart-tv"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-133",
+        "user_name": "Зоригт",
+        "rating": 5,
+        "comment": "Кино үзэхэд кино театрт сууж байгаа мэт контраст, төгс хар өнгө гаргана.",
+        "date": "2024-01-28T20:00:00Z"
+      },
+      {
+        "review_id": "REV-134",
+        "user_name": "Ариунболд",
+        "rating": 4.9,
+        "comment": "PS5 залгаад тоглоход 120Hz дээр ямар ч хоцрогдолгүй, өнгө будаг гайхалтай.",
+        "date": "2024-02-15T19:40:00Z"
+      }
+    ],
+    "created_at": "2023-09-01T10:00:00Z"
+  },
+  {
+    "product_id": "PROD-015",
+    "name": "Samsung 75-inch The Frame QLED 4K TV",
+    "slug": "samsung-frame-75-qled",
+    "category": "TV & Home Entertainment",
+    "sub_category": "Lifestyle TVs",
+    "brand": "Samsung",
+    "price": 2499.00,
+    "discount_price": 2199.00,
+    "stock": 6,
+    "status": "in_stock",
+    "specs": {
+      "screen_size_inch": 75,
+      "panel": "QLED 4K with Matte Display (Anti-Reflection)",
+      "art_mode": "Transform TV into Art Gallery",
+      "mount": "Slim Fit Wall Mount included",
+      "sound": "40W 2.0.2CH with Object Tracking Sound"
+    },
+    "tags": ["samsung", "the-frame", "qled", "art-mode", "interior", "75inch"],
+    "rating_summary": {
+      "average_rating": 4.7,
+      "review_count": 1
+    },
+    "reviews": [
+      {
+        "review_id": "REV-135",
+        "user_name": "Мандах",
+        "rating": 4.7,
+        "comment": "Ханан дээр яг уран зураг шиг харагддаг, интерьерт маш гоё зохицсон.",
+        "date": "2024-02-10T14:10:00Z"
+      }
+    ],
+    "created_at": "2023-11-12T14:00:00Z"
+  },
+  {
+    "product_id": "PROD-016",
+    "name": "Apple Watch Ultra 2 GPS + Cellular 49mm",
+    "slug": "apple-watch-ultra-2",
+    "category": "Wearables & Smartwatches",
+    "sub_category": "Smartwatches",
+    "brand": "Apple",
+    "price": 799.00,
+    "discount_price": 749.00,
+    "stock": 14,
+    "status": "in_stock",
+    "specs": {
+      "case_material": "Titanium 49mm",
+      "screen_brightness_nits": 3000,
+      "chip": "Apple S9 SiP with Double Tap gesture",
+      "water_resistance_m": 100,
+      "battery_hours": 36,
+      "low_power_hours": 72,
+      "gps": "Precision dual-frequency GPS (L1 and L5)"
+    },
+    "tags": ["smartwatch", "apple", "ultra", "titanium", "fitness", "extreme-sports"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-136",
+        "user_name": "Даваадорж",
+        "rating": 5,
+        "comment": "Ууланд алхах, гүйлт хийхэд GPS нарийвчлал болон батерей үнэхээр итгэлтэй.",
+        "date": "2024-01-30T10:00:00Z"
+      },
+      {
+        "review_id": "REV-137",
+        "user_name": "Цогт",
+        "rating": 4.8,
+        "comment": "Дэлгэцийн гэрэл нарны шууд тусгалд ч маш тод харагддаг.",
+        "date": "2024-02-14T15:30:00Z"
+      }
+    ],
+    "created_at": "2023-09-29T12:00:00Z"
+  },
+  {
+    "product_id": "PROD-017",
+    "name": "Garmin Fenix 7X Pro Sapphire Solar",
+    "slug": "garmin-fenix-7x-pro",
+    "category": "Wearables & Smartwatches",
+    "sub_category": "Sports Watches",
+    "brand": "Garmin",
+    "price": 899.99,
+    "discount_price": 849.99,
+    "stock": 11,
+    "status": "in_stock",
+    "specs": {
+      "lens_material": "Power Sapphire (Solar charging)",
+      "bezel_material": "Titanium 51mm",
+      "battery_days": "Up to 37 days in smartwatch mode",
+      "flashlight": "Built-in LED flashlight",
+      "sensors": ["Heart rate Gen5", "Pulse Ox", "TopoActive Maps", "Multiband GPS"]
+    },
+    "tags": ["garmin", "fenix", "solar", "marathon", "hiking", "battery-life"],
+    "rating_summary": {
+      "average_rating": 5.0,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-138",
+        "user_name": "Чингис",
+        "rating": 5,
+        "comment": "Нэг бүтэн сар цэнэглэхгүй явж чаддаг нь хамгийн том давуу тал.",
+        "date": "2024-01-24T08:15:00Z"
+      },
+      {
+        "review_id": "REV-139",
+        "user_name": "Энхболд",
+        "rating": 5,
+        "comment": "LED гар чийдэн болон оффлайн газрын зураг нь аялалд аминд ордог.",
+        "date": "2024-02-16T17:00:00Z"
+      }
+    ],
+    "created_at": "2023-10-08T09:00:00Z"
+  },
+  {
+    "product_id": "PROD-018",
+    "name": "Sony Alpha A7 IV Mirrorless Camera (Body Only)",
+    "slug": "sony-a7-iv-body",
+    "category": "Cameras & Photography",
+    "sub_category": "Mirrorless Cameras",
+    "brand": "Sony",
+    "price": 2498.00,
+    "discount_price": 2298.00,
+    "stock": 7,
+    "status": "in_stock",
+    "specs": {
+      "sensor": "33MP Full-Frame Exmor R CMOS",
+      "image_processor": "BIONZ XR",
+      "video": "4K 60p 10-bit 4:2:2, S-Cinetone",
+      "autofocus": "759 phase-detection points, Real-time Eye AF (Human, Animal, Bird)",
+      "stabilization": "5-axis optical in-body stabilization (5.5 stops)"
+    },
+    "tags": ["camera", "sony", "fullframe", "photography", "cinematography", "4k60"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-140",
+        "user_name": "Бат-Оргил",
+        "rating": 5,
+        "comment": "Гэрэл зураг болон видео хослон бүтээгчдэд хамгийн оновчтой бүрэн хэмжээст камер.",
+        "date": "2024-01-11T16:20:00Z"
+      },
+      {
+        "review_id": "REV-141",
+        "user_name": "Хонгор",
+        "rating": 4.8,
+        "comment": "Автофокус нь байг хэзээ ч алдахгүй наалдаж дагадаг.",
+        "date": "2024-02-09T13:45:00Z"
+      }
+    ],
+    "created_at": "2023-07-14T10:00:00Z"
+  },
+  {
+    "product_id": "PROD-019",
+    "name": "DJI Mini 4 Pro Drone with RC 2 Controller",
+    "slug": "dji-mini-4-pro-rc2",
+    "category": "Cameras & Photography",
+    "sub_category": "Drones",
+    "brand": "DJI",
+    "price": 959.00,
+    "discount_price": 899.00,
+    "stock": 13,
+    "status": "in_stock",
+    "specs": {
+      "weight_g": 249,
+      "regulations": "Sub-249g (No license required in most regions)",
+      "camera": "4K/60fps HDR, True Vertical Shooting",
+      "obstacle_sensing": "Omnidirectional Obstacle Sensing",
+      "transmission": "DJI O4 (20km FHD video transmission)",
+      "flight_time_min": 34
+    },
+    "tags": ["dji", "drone", "mini4pro", "4k-video", "aerial-photography"],
+    "rating_summary": {
+      "average_rating": 4.8,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-142",
+        "user_name": "Цогбаяр",
+        "rating": 5,
+        "comment": "249 грамм жинтэй гэхэд саад мэдрэгч болон 4K дүрсний тогтворжилт гайхалтай сайн.",
+        "date": "2024-01-27T11:15:00Z"
+      },
+      {
+        "review_id": "REV-143",
+        "user_name": "Нямдорж",
+        "rating": 4.7,
+        "comment": "Дэлгэцтэй RC 2 удирдлага нь утас залгах шаардлагагүй маш хялбар.",
+        "date": "2024-02-18T14:50:00Z"
+      }
+    ],
+    "created_at": "2023-10-22T08:00:00Z"
+  },
+  {
+    "product_id": "PROD-020",
+    "name": "Dyson V15 Detect Absolute Cordless Vacuum",
+    "slug": "dyson-v15-detect",
+    "category": "Home & Kitchen",
+    "sub_category": "Vacuum Cleaners",
+    "brand": "Dyson",
+    "price": 749.99,
+    "discount_price": 649.99,
+    "stock": 17,
+    "status": "in_stock",
+    "specs": {
+      "suction_power_aw": 230,
+      "laser_illumination": "Fluffy Optic reveals invisible microscopic dust",
+      "piezo_sensor": "Counts and sizes dust particles automatically",
+      "run_time_min": 60,
+      "filtration": "Whole-machine HEPA filtration 99.99% down to 0.1 microns",
+      "weight_kg": 3.1
+    },
+    "tags": ["dyson", "vacuum", "laser", "hepa", "cordless", "home-appliances"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 3
+    },
+    "reviews": [
+      {
+        "review_id": "REV-144",
+        "user_name": "Ганцэцэг",
+        "rating": 5,
+        "comment": "Нүдэнд харагддаггүй нарийн тоосыг ногоон лазераар илрүүлж цэвэрлэдэг нь үнэхээр сүрдмээр.",
+        "date": "2024-01-15T19:00:00Z"
+      },
+      {
+        "review_id": "REV-145",
+        "user_name": "Энхжаргал",
+        "rating": 5,
+        "comment": "Сорох хүч нь утастай тоос сорогчоос ч илүү хүчтэй санагдсан.",
+        "date": "2024-02-03T11:25:00Z"
+      },
+      {
+        "review_id": "REV-146",
+        "user_name": "Оюунчимэг",
+        "rating": 4.7,
+        "comment": "Батерей 60 минут хүрэлцээтэй, хог асгах нь маш цэвэрхэн шийдэгдсэн.",
+        "date": "2024-02-17T16:10:00Z"
+      }
+    ],
+    "created_at": "2023-08-15T14:00:00Z"
+  },
+  {
+    "product_id": "PROD-021",
+    "name": "Breville Barista Touch Impress Espresso Machine",
+    "slug": "breville-barista-touch-impress",
+    "category": "Home & Kitchen",
+    "sub_category": "Coffee Machines",
+    "brand": "Breville",
+    "price": 1499.95,
+    "discount_price": 1399.95,
+    "stock": 5,
+    "status": "in_stock",
+    "specs": {
+      "heating_system": "ThermoJet 3-second heat up",
+      "tamper": "Assisted tamping with 10kg impression and 7-degree barista twist",
+      "milk_frothing": "Auto MilQ hands-free microfoam with oat, almond, soy settings",
+      "screen": "Color touchscreen guidance",
+      "bean_hopper_g": 340
+    },
+    "tags": ["breville", "coffee", "espresso", "barista", "latte-art", "kitchen"],
+    "rating_summary": {
+      "average_rating": 4.8,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-147",
+        "user_name": "Батсайхан",
+        "rating": 5,
+        "comment": "Гэртээ яг л кафе шиг амттай латте, капучино хийх боломжтой болсон.",
+        "date": "2024-01-21T09:00:00Z"
+      },
+      {
+        "review_id": "REV-148",
+        "user_name": "Сувд",
+        "rating": 4.6,
+        "comment": "Сүү хөөсрүүлэх ухаалаг систем нь ургамлын гаралтай сүүнд ч гайхалтай ажилладаг.",
+        "date": "2024-02-12T10:30:00Z"
+      }
+    ],
+    "created_at": "2023-11-01T09:00:00Z"
+  },
+  {
+    "product_id": "PROD-022",
+    "name": "Roborock S8 Pro Ultra Robot Vacuum and Mop",
+    "slug": "roborock-s8-pro-ultra",
+    "category": "Home & Kitchen",
+    "sub_category": "Robot Cleaners",
+    "brand": "Roborock",
+    "price": 1599.99,
+    "discount_price": 1399.99,
+    "stock": 8,
+    "status": "in_stock",
+    "specs": {
+      "dock": "RockDock Ultra (Self-washing, self-drying, self-emptying, self-refilling)",
+      "suction_power_pa": 6000,
+      "navigation": "PreciSense LiDAR + Reactive 3D Obstacle Avoidance",
+      "mop_system": "VibraRise 2.0 dual vibration modules with auto lifting"
+    },
+    "tags": ["roborock", "robot-vacuum", "smart-home", "lidar", "automation"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-149",
+        "user_name": "Эрдэнэцэцэг",
+        "rating": 5,
+        "comment": "Шал угаагч алчуураа өөрөө халуун агаараар хатаадаг тул ямар ч үнэр гарахгүй.",
+        "date": "2024-01-18T14:45:00Z"
+      },
+      {
+        "review_id": "REV-150",
+        "user_name": "Төмөрбаатар",
+        "rating": 4.8,
+        "comment": "Гэрийн төлөвлөгөөг нарийн гаргаж, саад тойрох чадвар нь онцгой сайн.",
+        "date": "2024-02-11T18:20:00Z"
+      }
+    ],
+    "created_at": "2023-10-18T13:00:00Z"
+  },
+  {
+    "product_id": "PROD-023",
+    "name": "Keychron Q1 Pro Wireless Custom Mechanical Keyboard",
+    "slug": "keychron-q1-pro",
+    "category": "Accessories & Peripherals",
+    "sub_category": "Keyboards",
+    "brand": "Keychron",
+    "price": 199.00,
+    "discount_price": 185.00,
+    "stock": 28,
+    "status": "in_stock",
+    "specs": {
+      "layout": "75% QMK/VIA programmable",
+      "body": "Full CNC Aluminum body",
+      "switches": "K Pro Banana tactile (Hot-swappable)",
+      "connectivity": "Bluetooth 5.1 & Type-C wired",
+      "keycaps": "KSA double-shot PBT",
+      "compatibility": ["macOS", "Windows", "Linux"]
+    },
+    "tags": ["keyboard", "mechanical", "keychron", "custom", "hot-swap", "developer"],
+    "rating_summary": {
+      "average_rating": 4.8,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-151",
+        "user_name": "Билгүүн",
+        "rating": 5,
+        "comment": "Хүнд хөнгөн цагаан их бие, товч даралтын чимээ (thock) үнэхээр сэтгэл ханамжтай.",
+        "date": "2024-01-26T12:00:00Z"
+      },
+      {
+        "review_id": "REV-152",
+        "user_name": "Энхбат",
+        "rating": 4.7,
+        "comment": "Mac болон Windows хооронд шууд шилжиж ажилладаг нь программист хүнд их тохирно.",
+        "date": "2024-02-14T16:30:00Z"
+      }
+    ],
+    "created_at": "2023-09-10T11:00:00Z"
+  },
+  {
+    "product_id": "PROD-024",
+    "name": "Logitech MX Master 3S Wireless Mouse",
+    "slug": "logitech-mx-master-3s",
+    "category": "Accessories & Peripherals",
+    "sub_category": "Mice",
+    "brand": "Logitech",
+    "price": 99.99,
+    "discount_price": 89.99,
+    "stock": 42,
+    "status": "in_stock",
+    "specs": {
+      "sensor_dpi": "8000 DPI Darkfield (tracks on glass)",
+      "quiet_clicks": "90% quieter clicks",
+      "scroll_wheel": "MagSpeed electromagnetic scroll (1000 lines/sec)",
+      "battery": "70 days on full charge",
+      "multi_device": "Easy-Switch for up to 3 computers"
+    },
+    "tags": ["mouse", "logitech", "mx-master", "productivity", "ergonomic", "office"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 3
+    },
+    "reviews": [
+      {
+        "review_id": "REV-153",
+        "user_name": "Хүслэн",
+        "rating": 5,
+        "comment": "Оффисын ажилд үүнээс илүү гарт эвтэйхэн хулгана байхгүй. Чимээгүй товшилт нь таатай.",
+        "date": "2024-01-09T15:10:00Z"
+      },
+      {
+        "review_id": "REV-154",
+        "user_name": "Нандин",
+        "rating": 5,
+        "comment": "Шилэн ширээн дээр ч гацахгүй жигд гулсаж ажилладаг.",
+        "date": "2024-01-29T10:00:00Z"
+      },
+      {
+        "review_id": "REV-155",
+        "user_name": "Цог",
+        "rating": 4.8,
+        "comment": "Хэвтээ гүйлгэх дугуй нь Excel болон монтаж хийхэд маш тустай.",
+        "date": "2024-02-19T11:20:00Z"
+      }
+    ],
+    "created_at": "2023-08-01T08:00:00Z"
+  },
+  {
+    "product_id": "PROD-025",
+    "name": "Dell UltraSharp 32 4K USB-C Hub Monitor (U3223QE)",
+    "slug": "dell-ultrasharp-32-4k-u3223qe",
+    "category": "Accessories & Peripherals",
+    "sub_category": "Monitors",
+    "brand": "Dell",
+    "price": 899.99,
+    "discount_price": 799.99,
+    "stock": 10,
+    "status": "in_stock",
+    "specs": {
+      "screen_size_inch": 31.5,
+      "panel": "IPS Black Technology (2000:1 contrast ratio)",
+      "resolution": "3840 x 2160 at 60Hz",
+      "color_gamut": "100% sRGB, 98% DCI-P3",
+      "power_delivery_w": 90,
+      "ports": ["USB-C Hub", "RJ45 Ethernet", "DisplayPort 1.4", "HDMI 2.0", "KVM switch"]
+    },
+    "tags": ["monitor", "dell", "ultrasharp", "4k", "ips-black", "designer", "usb-c"],
+    "rating_summary": {
+      "average_rating": 4.8,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-156",
+        "user_name": "Батжаргал",
+        "rating": 5,
+        "comment": "Нэг USB-C утсаар зөөврийн компьютераа цэнэглэж, интернэт, дэлгэцээ бүгдийг холбодог.",
+        "date": "2024-01-17T13:40:00Z"
+      },
+      {
+        "review_id": "REV-157",
+        "user_name": "Мөнхцэцэг",
+        "rating": 4.7,
+        "comment": "IPS Black технологийн хар өнгө, өнгөний нарийвчлал дизайнеруудад төгс зохирно.",
+        "date": "2024-02-07T17:15:00Z"
+      }
+    ],
+    "created_at": "2023-09-05T09:00:00Z"
+  },
+  {
+    "product_id": "PROD-026",
+    "name": "Anker Prime 20000mAh Power Bank (200W)",
+    "slug": "anker-prime-20000mah-200w",
+    "category": "Accessories & Peripherals",
+    "sub_category": "Power Banks",
+    "brand": "Anker",
+    "price": 129.99,
+    "discount_price": 109.99,
+    "stock": 38,
+    "status": "in_stock",
+    "specs": {
+      "capacity_mah": 20000,
+      "total_output_w": 200,
+      "single_port_max_w": 100,
+      "display": "Smart Digital Display with real-time stats",
+      "ports": "2x USB-C + 1x USB-A"
+    },
+    "tags": ["anker", "powerbank", "fast-charge", "usb-c", "travel"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-158",
+        "user_name": "Жаргалсайхан",
+        "rating": 5,
+        "comment": "MacBook Pro-г бүрэн хурдаар нь цэнэглэдэг, аялалд хамгийн хэрэгтэй зүйл.",
+        "date": "2024-01-23T11:00:00Z"
+      },
+      {
+        "review_id": "REV-159",
+        "user_name": "Алтангэрэл",
+        "rating": 4.8,
+        "comment": "Дэлгэц дээр хэдэн ваттаар цэнэглэж байгаа нь харагддаг нь маш ухаалаг.",
+        "date": "2024-02-13T19:30:00Z"
+      }
+    ],
+    "created_at": "2023-11-25T14:00:00Z"
+  },
+  {
+    "product_id": "PROD-027",
+    "name": "Sonos Era 300 Spatial Audio Smart Speaker",
+    "slug": "sonos-era-300",
+    "category": "Audio & Sound",
+    "sub_category": "Smart Speakers",
+    "brand": "Sonos",
+    "price": 449.00,
+    "discount_price": 419.00,
+    "stock": 14,
+    "status": "in_stock",
+    "specs": {
+      "audio_tech": "Dolby Atmos Spatial Audio",
+      "drivers": "6 class-D digital amplifiers, 4 tweeters, 2 woofers",
+      "tuning": "Trueplay room tuning technology",
+      "connectivity": ["WiFi 6", "Bluetooth 5.0", "Apple AirPlay 2", "USB-C Line-In"],
+      "voice_control": ["Sonos Voice Control", "Amazon Alexa"]
+    },
+    "tags": ["sonos", "speaker", "dolby-atmos", "spatial-audio", "smart-home", "hifi"],
+    "rating_summary": {
+      "average_rating": 4.7,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-160",
+        "user_name": "Цогтбаатар",
+        "rating": 5,
+        "comment": "Өрөө дүүрэн тархах Dolby Atmos орон зайн дуугаралт нь үнэхээр ер бусын мэдрэмж өгдөг.",
+        "date": "2024-01-20T16:00:00Z"
+      },
+      {
+        "review_id": "REV-161",
+        "user_name": "Сүндэр",
+        "rating": 4.5,
+        "comment": "AirPlay-ээр ажиллахад дууны чанар маш өндөр байна.",
+        "date": "2024-02-15T12:10:00Z"
+      }
+    ],
+    "created_at": "2023-10-10T10:00:00Z"
+  },
+  {
+    "product_id": "PROD-028",
+    "name": "Philips Hue White and Color Ambiance Starter Kit",
+    "slug": "philips-hue-starter-kit",
+    "category": "Smart Home & IoT",
+    "sub_category": "Smart Lighting",
+    "brand": "Philips",
+    "price": 199.99,
+    "discount_price": 169.99,
+    "stock": 25,
+    "status": "in_stock",
+    "specs": {
+      "bulbs_included": 3,
+      "base": "E26",
+      "bridge": "Hue Bridge included",
+      "colors": "16 million colors + warm to cool white",
+      "smart_integrations": ["Apple HomeKit", "Google Home", "Amazon Alexa", "Matter"]
+    },
+    "tags": ["smart-home", "lighting", "philips-hue", "iot", "matter", "rgb"],
+    "rating_summary": {
+      "average_rating": 4.8,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-162",
+        "user_name": "Хишигдорж",
+        "rating": 5,
+        "comment": "Кино үзэх болон тоглоом тоглох үед дэлгэцийн өнгөтэй синхрончлогддог нь тасархай.",
+        "date": "2024-01-28T18:30:00Z"
+      },
+      {
+        "review_id": "REV-163",
+        "user_name": "Энхчимэг",
+        "rating": 4.6,
+        "comment": "Өглөө нар мандах мэт аажмаар асаж сэрээдэг автомат тохиргоо нь өдрийг эрч хүчтэй эхлүүлдэг.",
+        "date": "2024-02-16T08:15:00Z"
+      }
+    ],
+    "created_at": "2023-09-18T15:00:00Z"
+  },
+  {
+    "product_id": "PROD-029",
+    "name": "Nest Learning Thermostat (3rd Gen)",
+    "slug": "nest-learning-thermostat",
+    "category": "Smart Home & IoT",
+    "sub_category": "Climate Control",
+    "brand": "Google",
+    "price": 249.00,
+    "discount_price": 199.00,
+    "stock": 16,
+    "status": "in_stock",
+    "specs": {
+      "screen": "Farsight high-res color display",
+      "energy_saving": "Auto-schedule learns temperatures you like and programs itself",
+      "remote_control": "Google Home app & Voice control",
+      "compatibility": "Works with 95% of 24V heating and cooling systems"
+    },
+    "tags": ["google", "nest", "thermostat", "energy-saving", "smart-home", "iot"],
+    "rating_summary": {
+      "average_rating": 4.6,
+      "review_count": 1
+    },
+    "reviews": [
+      {
+        "review_id": "REV-164",
+        "user_name": "Мөнхбаатар",
+        "rating": 4.6,
+        "comment": "Гэрийн дулааныг өөрөө суралцаж тохируулан цахилгааны зардлыг мэдэгдэхүйц бууруулсан.",
+        "date": "2024-02-06T15:45:00Z"
+      }
+    ],
+    "created_at": "2023-08-30T10:00:00Z"
+  },
+  {
+    "product_id": "PROD-030",
+    "name": "Ring Video Doorbell Pro 2",
+    "slug": "ring-video-doorbell-pro-2",
+    "category": "Smart Home & IoT",
+    "sub_category": "Security & Cameras",
+    "brand": "Ring",
+    "price": 249.99,
+    "discount_price": 219.99,
+    "stock": 20,
+    "status": "in_stock",
+    "specs": {
+      "video": "1536p HD Head-to-Toe Video",
+      "audio": "Two-Way Talk with Audio+",
+      "motion_detection": "3D Motion Detection with Bird's Eye View (Radar-powered)",
+      "night_vision": "Color Night Vision",
+      "power": "Hardwired to existing doorbell wiring"
+    },
+    "tags": ["ring", "doorbell", "security", "camera", "smart-home", "iot"],
+    "rating_summary": {
+      "average_rating": 4.7,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-165",
+        "user_name": "Дэлгэр",
+        "rating": 5,
+        "comment": "Хүргэлтийн ажилтан ирэхэд хаалганы өмнөх багцыг толгойноос хөл хүртэл бүрэн тод харуулдаг.",
+        "date": "2024-01-31T12:00:00Z"
+      },
+      {
+        "review_id": "REV-166",
+        "user_name": "Бадамгарав",
+        "rating": 4.5,
+        "comment": "Радарт 3D хөдөлгөөн мэдрэгч нь хуурамч дохиолол өгдөггүй маш найдвартай.",
+        "date": "2024-02-17T09:30:00Z"
+      }
+    ],
+    "created_at": "2023-10-02T16:00:00Z"
+  },
+  {
+    "product_id": "PROD-031",
+    "name": "Kindle Paperwhite Signature Edition 32GB",
+    "slug": "kindle-paperwhite-signature-32gb",
+    "category": "Computers & Laptops",
+    "sub_category": "E-Readers",
+    "brand": "Amazon",
+    "price": 189.99,
+    "discount_price": 159.99,
+    "stock": 30,
+    "status": "in_stock",
+    "specs": {
+      "display_inch": 6.8,
+      "ppi": 300,
+      "lighting": "Auto-adjusting front light & adjustable warm light",
+      "charging": "Wireless charging + USB-C",
+      "waterproof": "IPX8 waterproof",
+      "battery_weeks": 10
+    },
+    "tags": ["kindle", "amazon", "ereader", "books", "paperwhite", "portable"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-167",
+        "user_name": "Ариунаа",
+        "rating": 5,
+        "comment": "Нүд огт ядраахгүй, цаас шиг мэдрэмжтэй, шөнө уншихад шар гэрэл нь маш тухтай.",
+        "date": "2024-01-14T21:00:00Z"
+      },
+      {
+        "review_id": "REV-168",
+        "user_name": "Сүхбат",
+        "rating": 4.8,
+        "comment": "Батарей нь бараг 2 сар хангалттай хүрдэг.",
+        "date": "2024-02-11T13:10:00Z"
+      }
+    ],
+    "created_at": "2023-09-12T11:00:00Z"
+  },
+  {
+    "product_id": "PROD-032",
+    "name": "Bose SoundLink Flex Bluetooth Speaker",
+    "slug": "bose-soundlink-flex",
+    "category": "Audio & Sound",
+    "sub_category": "Portable Speakers",
+    "brand": "Bose",
+    "price": 149.00,
+    "discount_price": 129.00,
+    "stock": 27,
+    "status": "in_stock",
+    "specs": {
+      "waterproof": "IP67 waterproof and dustproof (floats in water)",
+      "positioniq": "Detects orientation and optimizes sound automatically",
+      "battery_hours": 12,
+      "materials": "Steel grille and silicone exterior",
+      "weight_g": 590
+    },
+    "tags": ["bose", "speaker", "bluetooth", "waterproof", "outdoor", "bass"],
+    "rating_summary": {
+      "average_rating": 4.8,
+      "review_count": 1
+    },
+    "reviews": [
+      {
+        "review_id": "REV-169",
+        "user_name": "Түмэнбаяр",
+        "rating": 4.8,
+        "comment": "Усанд хөвдөг, салхи шороонд тэсвэртэй, жижиг хэмжээтэй ч басс нь гайхалтай хүчтэй.",
+        "date": "2024-02-04T12:00:00Z"
+      }
+    ],
+    "created_at": "2023-08-25T13:00:00Z"
+  },
+  {
+    "product_id": "PROD-033",
+    "name": "Samsung 49-inch Odyssey OLED G9 Curved Gaming Monitor",
+    "slug": "samsung-odyssey-oled-g9-49",
+    "category": "Accessories & Peripherals",
+    "sub_category": "Monitors",
+    "brand": "Samsung",
+    "price": 1799.99,
+    "discount_price": 1399.99,
+    "stock": 5,
+    "status": "in_stock",
+    "specs": {
+      "screen_size_inch": 49,
+      "aspect_ratio": "32:9 Dual QHD (5120 x 1440)",
+      "panel": "OLED Neo Quantum Processor Pro",
+      "curvature": "1800R",
+      "refresh_rate_hz": 240,
+      "response_time_ms": 0.03
+    },
+    "tags": ["samsung", "monitor", "ultrawide", "oled", "gaming", "240hz", "curved"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-170",
+        "user_name": "Батхүү",
+        "rating": 5,
+        "comment": "0.03ms хариу үйлдэл болон 240Hz OLED дэлгэц нь тоглоомын ертөнцөд жинхэнэ хувьсгал.",
+        "date": "2024-01-22T19:30:00Z"
+      },
+      {
+        "review_id": "REV-171",
+        "user_name": "Чинбат",
+        "rating": 4.8,
+        "comment": "Хоёр 27 инчийн 2K мониторыг голд нь хүрээгүй залгасан мэт бүтээмжийг асар их өсгөдөг.",
+        "date": "2024-02-15T22:00:00Z"
+      }
+    ],
+    "created_at": "2023-11-18T10:00:00Z"
+  },
+  {
+    "product_id": "PROD-034",
+    "name": "Fujifilm X-T5 Mirrorless Digital Camera",
+    "slug": "fujifilm-x-t5-silver",
+    "category": "Cameras & Photography",
+    "sub_category": "Mirrorless Cameras",
+    "brand": "Fujifilm",
+    "price": 1699.95,
+    "discount_price": 1599.95,
+    "stock": 8,
+    "status": "in_stock",
+    "specs": {
+      "sensor": "40.2MP APS-C X-Trans CMOS 5 HR",
+      "image_processor": "X-Processor 5 with AI subject detection",
+      "film_simulation": "19 Film Simulation modes (Nostalgic Neg, Classic Chrome etc.)",
+      "stabilization": "7.0 stops 5-axis In-Body Image Stabilization (IBIS)",
+      "viewfinder": "3.69M-dot OLED EVF"
+    },
+    "tags": ["fujifilm", "camera", "film-simulation", "photography", "retro", "street-photo"],
+    "rating_summary": {
+      "average_rating": 4.9,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-172",
+        "user_name": "Энхболд",
+        "rating": 5,
+        "comment": "Киноны хальсны өнгө дүрслэлийн горимууд (Film Simulation) зураг янзлах цагийг бүрэн хэмнэдэг.",
+        "date": "2024-01-29T15:20:00Z"
+      },
+      {
+        "review_id": "REV-173",
+        "user_name": "Сэргэлэн",
+        "rating": 4.8,
+        "comment": "Хуучны сонгодог залгах дугуйтай удирдлага нь зураг авах мэдрэмжийг дээд зэргээр төрүүлнэ.",
+        "date": "2024-02-17T11:40:00Z"
+      }
+    ],
+    "created_at": "2023-10-14T09:00:00Z"
+  },
+  {
+    "product_id": "PROD-035",
+    "name": "Marshall Stanmore III Bluetooth Speaker",
+    "slug": "marshall-stanmore-iii",
+    "category": "Audio & Sound",
+    "sub_category": "Home Speakers",
+    "brand": "Marshall",
+    "price": 379.99,
+    "discount_price": 349.99,
+    "stock": 15,
+    "status": "in_stock",
+    "specs": {
+      "power_amplifiers": "One 50 Watt Class D amp for woofer, Two 15 Watt Class D amps for tweeters",
+      "frequency_range": "45–20,000 Hz",
+      "connectivity": ["Bluetooth 5.2", "3.5mm Aux", "RCA input"],
+      "design": "Vintage rock'n'roll styling with brass details"
+    },
+    "tags": ["marshall", "vintage", "bluetooth-speaker", "rock", "bass", "interior"],
+    "rating_summary": {
+      "average_rating": 4.8,
+      "review_count": 2
+    },
+    "reviews": [
+      {
+        "review_id": "REV-174",
+        "user_name": "Отгонбаяр",
+        "rating": 5,
+        "comment": "Рок дуу болон амьд хөгжмийн басс, гитарын дуугаралтыг гайхалтай тод гаргадаг.",
+        "date": "2024-01-16T20:15:00Z"
+      },
+      {
+        "review_id": "REV-175",
+        "user_name": "Саруул",
+        "rating": 4.7,
+        "comment": "Гэрийн зочны өрөөнд маш гоё хээнцэр винтаж харагдана.",
+        "date": "2024-02-10T14:30:00Z"
+      }
+    ],
+    "created_at": "2023-09-08T12:00:00Z"
+  }
+]
