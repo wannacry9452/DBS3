@@ -1,128 +1,36 @@
-================================================================================
-      NoSQL ӨГӨГДЛИЙН САНГИЙН ТУРШИЛТЫН ТӨСӨЛ — СИСТЕМИЙН АЖИЛЛАГАА
-      Сэдэв: E-Commerce цахим худалдааны өгөгдлийн загварчлал ба MongoDB
-================================================================================
+===========================================================================
+ БИЕ ДААЛТЫН АЖИЛ №3: NoSQL ӨГӨГДЛИЙН САНГУУД (MongoDB)
+ Цахим худалдааны бүтээгдэхүүний каталогийн туршилтын систем
+===========================================================================
 
-[ҮЕ ШАТ 1] Өгөгдлийн сантай холбогдох болон орчин бэлтгэх...
-[INFO] Initialized Embedded MongoDB Engine (Pure Python, Full API Compatible).
+--- 1. ӨГӨГДЛИЙН САНГ ЭХЛҮҮЛЭХ БА 25 БАРИМТ ОРУУЛАХ (init_db.py) ---
+Амжилттай оруулсан баримтын тоо: 25
 
-[ҮЕ ШАТ 2] Анхны өгөгдөл бэлтгэх, ачаалах (Seeding)...
-[OK] Seeded 35 product documents into 'products' collection.
-[OK] Seeded 5 order documents into 'orders' collection.
-[OK] Created indexes: idx_category_price, idx_brand, idx_customer_id.
- -> Баталгаажуулалт: Нийт 35 бүтээгдэхүүн, 5 захиалга амжилттай үүслээ.
+--- 2. БҮРЭН CRUD ҮЙЛДЛҮҮДИЙН ГҮЙЦЭТГЭЛ (crud_operations.py) ---
+[CREATE] Нэмэгдсэн _id: 673c41a9f2d8e4b1c0915900
 
-================================================================================
-[ҮЕ ШАТ 3] CRUD ҮЙЛДЛҮҮДИЙН ТУРШИЛТ
-================================================================================
+[READ] Шүүсэн зөөврийн компьютерууд:
+  {'product_id': 105, 'name': 'HP Pavilion 15', 'price': 2450000, 'stock': 25}
+  {'product_id': 102, 'name': 'Apple MacBook Air M3', 'price': 4600000, 'stock': 20}
 
->>> 3.1 CREATE: Шинэ баримт нэмэх (insert_one)
-[CREATE] Product added with ID: 'PROD-036' | Name: Apple Vision Pro 512GB Spatial Computer
+[UPDATE] Шинэчлэгдсэн баримт: 1
 
->>> 3.2 READ: Төрөл бүрийн шүүлтүүрээр хайх
+[DELETE] Устгагдсан баримт: 1
 
- A) ID-аар хайх:
-[READ BY ID] Found: Apple Vision Pro 512GB Spatial Computer ($3699.0) - Brand: Apple
+--- 3. ДЭВШИЛТЭТ БОЛОМЖ: ИНДЕКС, ТЕКСТ ХАЙЛТ, AGGREGATION (advanced_features.py) ---
+=== TEXT SEARCH ҮР ДҮН ('apple laptop') ===
+ Apple MacBook Air M3 | 4,600,000₮ | Оноо: 2.00
+ Apple AirPods Pro 2 | 890,000₮ | Оноо: 1.25
+ Lenovo ThinkPad X1 Carbon Gen 11 | 5,450,000₮ | Оноо: 0.75
+ ASUS ROG Zephyrus G14 | 6,200,000₮ | Оноо: 0.75
 
- B) Ангилал ба Үнийн хязгаараар хайх ($gte, $lte):
-[READ FILTER] Found 2 items in Category: 'Computers & Laptops' between $1000 and $2600:
-   -> ASUS ROG Zephyrus G14 (2024) | Price: $1999.0 | Stock: 15
-   -> Dell XPS 15 9530 OLED | Price: $2499.0 | Stock: 12
+=== AGGREGATION PIPELINE: АНГИЛЛЫН ТАЙЛАН ===
+ LAPTOP     | Тоо:  5 | Дундаж үнэ:  4,930,000₮ | Агуулахын нийт дүн:   338,650,000₮
+ SMARTPHONE | Тоо:  5 | Дундаж үнэ:  3,260,000₮ | Агуулахын нийт дүн:   274,450,000₮
+ AUDIO      | Тоо:  5 | Дундаж үнэ:    932,000₮ | Агуулахын нийт дүн:   130,110,000₮
+ MONITOR    | Тоо:  5 | Дундаж үнэ:  1,572,000₮ | Агуулахын нийт дүн:    88,720,000₮
+ ACCESSORY  | Тоо:  5 | Дундаж үнэ:    351,000₮ | Агуулахын нийт дүн:    59,150,000₮
 
- C) Бүтцийн доторх Nested талбараар хайх (specs.ram_gb >= 32):
-[READ NESTED] Products with specs.ram_gb >= 32GB (3 items found):
-   * Apple MacBook Pro 16 M3 Max (Apple) - RAM: 48GB | CPU: Apple M3 Max (16-core CPU, 40-core GPU)
-   * Dell XPS 15 9530 OLED (Dell) - RAM: 32GB | CPU: Intel Core i9-13900H
-   * Lenovo Legion Pro 7i Gen 8 (Lenovo) - RAM: 32GB | CPU: Intel Core i9-13900HX
-
- D) Массивын түлхүүр үгээр хайх (tags = 'developer'):
-[READ TAG] Products tagged with 'developer' (1 items found):
-   # Keychron Q1 Pro Wireless Custom Mechanical Keyboard | Brand: Keychron | Price: $199.0
-
->>> 3.3 UPDATE: Талбар шинэчлэх ($set), тоолуур өөрчлөх ($inc), массив нэмэх ($push)
-
- A) Үнэ болон үлдэгдэл шинэчлэх:
-[UPDATE] Product 'PROD-036' modified: 1 doc(s) updated. (Price set to $3499.0, Stock delta: -1)
-
- B) Хэрэглэгчийн сэтгэгдэл нэмэх ($push) ба үнэлгээг дахин тооцоолох:
-[UPDATE EMBEDDED] Added review by 'Наранбаатар' to 'Apple Vision Pro 512GB Spatial Computer'. New Rating: 4.9 (2 reviews).
-
->>> 3.4 DELETE: Баримт устгах
-[CREATE] Product added with ID: 'PROD-TEMP-999' | Name: Temporary Test Item
- Устгахын өмнөх нийт тоо: 37
-[DELETE ONE] Product 'PROD-TEMP-999' deleted: 1 document removed.
- Устгасны дараах нийт тоо: 36
-
-================================================================================
-[ҮЕ ШАТ 4] ДЭВШИЛТЭТ БОЛОМЖУУДЫН ТУРШИЛТ (AGGREGATION, INDEX, TEXT SEARCH)
-================================================================================
-
-======================================================================
- [AGGREGATION 1] CATEGORY-WISE INVENTORY & PRICING SUMMARY
-======================================================================
-Category                     | Count | Avg Price  | Price Range     | Stock 
-----------------------------------------------------------------------
-Audio & Sound                | 6     | $342.66    | $149 - $449     | 157   
-Computers & Laptops          | 5     | $2197.20   | $190 - $3499    | 83    
-Smartphones & Tablets        | 5     | $1643.00   | $999 - $3499    | 78    
-Accessories & Peripherals    | 5     | $625.79    | $100 - $1800    | 123   
-Cameras & Photography        | 3     | $1718.98   | $959 - $2498    | 28    
-Home & Kitchen               | 3     | $1283.31   | $750 - $1600    | 30    
-Smart Home & IoT             | 3     | $232.99    | $200 - $250     | 61    
-Gaming & Consoles            | 2     | $399.99    | $350 - $450     | 41    
-TV & Home Entertainment      | 2     | $2199.49   | $1900 - $2499   | 15    
-Wearables & Smartwatches     | 2     | $849.50    | $799 - $900     | 25    
-======================================================================
-
-======================================================================
- [AGGREGATION 2] RATING DISTRIBUTION VIA $unwind PIPELINE
-======================================================================
-Rating Star  | Review Count | Sample Reviewers
-----------------------------------------------------------------------
-⭐ 5         | 41           | Билгүүн, Анужин, Тэмүүлэн, Гантулга (+37 more)
-⭐ 5.0       | 1            | Эрдэм
-⭐ 4.9       | 1            | Ариунболд
-⭐ 4.8       | 12           | Ундрах, Түвшин, Цогт, Хонгор (+8 more)
-⭐ 4.7       | 8            | Чингүүн, Очир, Мандах, Нямдорж (+4 more)
-⭐ 4.6       | 4            | Баяржаргал, Сувд, Энхчимэг, Мөнхбаатар
-⭐ 4.5       | 8            | Дөлгөөн, Золбоо, Энхжин, Эрдэнэ (+4 more)
-⭐ 4         | 2            | Баярмаа, Хулан
-======================================================================
-
-======================================================================
- [AGGREGATION 3] ORDER SALES REVENUE BY PAYMENT METHOD
-======================================================================
-Payment Method       | Orders   | Total Revenue  
-----------------------------------------------------------------------
-QPay                 | 2        | $3683.98       
-Bank Transfer        | 1        | $1348.00       
-SocialPay            | 1        | $747.99        
-Credit Card          | 1        | $649.99        
-======================================================================
-
-======================================================================
- [TEXT SEARCH] QUERY: 'apple m3' -> (1 matches found)
-======================================================================
- • [Apple] Apple MacBook Pro 16 M3 Max
-   Price: $3499.0 | Rating: 4.9⭐ | Tags: [laptop, apple, m3, workstation, retina, macos]
-======================================================================
-
-======================================================================
- [INDEX PERFORMANCE ANALYSIS]
-======================================================================
-Active Indexes in Collection:
- - Index Name: 'idx_category_price' on Keys: [('category', 1), ('price', -1)]
- - Index Name: 'idx_brand' on Keys: brand
-
-Query 1: Indexed compound query (category = 'Computers & Laptops', price <= 2500)
- Execution Plan: IXSCAN (Index Scan via 'idx_category_price')
- Matches: 3 items | Time: 0.1398 ms
-
-Query 2: Unindexed ad-hoc nested query (specs.weight_kg <= 2.0)
- Execution Plan: COLLSCAN (Full Collection Scan across all documents)
- Matches: 2 items | Time: 0.1130 ms
-======================================================================
-
-================================================================================
- ТУРШИЛТ БҮРЭН АМЖИЛТТАЙ ДУУСЛАА! БҮХ ҮР ДҮН test_run.log ФАЙЛД ХАДГАЛАГДЛАА.
-================================================================================
+===========================================================================
+ БҮХ ТУРШИЛТ АМЖИЛТТАЙ ГҮЙЦЭТГЭГДЛЭЭ!
+===========================================================================

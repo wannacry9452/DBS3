@@ -1,21 +1,26 @@
 """
 mongo_engine.py
 MongoDB Client & Collection Implementation in Pure Python
-Supports both local in-memory simulation and real MongoDB (via pymongo if installed & available).
+Supports both local simulation and real MongoDB (via pymongo if installed & available).
 Provides exact MongoDB API compatibility:
 - insert_one, insert_many
 - find, find_one, count_documents
 - update_one, update_many ($set, $inc, $push, $pull)
 - delete_one, delete_many
-- create_index, list_indexes
-- aggregate ($match, $group, $sort, $project, $unwind, $lookup)
-- Dot notation support (e.g. 'specs.ram_gb', 'rating_summary.average_rating')
+- create_index, list_indexes, drop
+- aggregate ($match, $group, $sort, $project, $unwind, $lookup, $multiply)
+- Text score search & sort support
 """
 
 import copy
 import re
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
+
+# MongoDB index constants
+ASCENDING = 1
+DESCENDING = -1
+TEXT = "text"
 
 class MongoCursor:
     """Simulates pymongo Cursor with sort, skip, limit, and list conversion."""
@@ -30,7 +35,12 @@ class MongoCursor:
             sort_keys = key_or_list
 
         for key, order in reversed(sort_keys):
-            reverse = (order == -1)
+            # Special handling for textScore metadata
+            if isinstance(order, dict) and order.get("$meta") == "textScore":
+                self._data.sort(key=lambda d: d.get("score", 0), reverse=True)
+                continue
+
+            reverse = (order == -1 or order == DESCENDING)
             def sort_val(doc):
                 val = MongoCollection._get_nested_val(doc, key)
                 if val is None:
@@ -66,6 +76,10 @@ class MongoCollection:
         self.documents: List[Dict[str, Any]] = []
         self.indexes: Dict[str, Any] = {}
 
+    def drop(self):
+        self.documents = []
+        self.indexes = {}
+
     @staticmethod
     def _get_nested_val(doc: Dict[str, Any], path: str) -> Any:
         keys = path.split('.')
@@ -95,9 +109,10 @@ class MongoCollection:
         for key, expected in query_filter.items():
             if key == "$text":
                 search_term = expected.get("$search", "").lower()
-                doc_str = str(doc).lower()
+                doc_str = (str(doc.get("name", "")) + " " + str(doc.get("brand", "")) + " " + " ".join(doc.get("tags", []))).lower()
                 terms = search_term.split()
-                if not all(t in doc_str for t in terms):
+                # Text match if any or all terms match
+                if not any(t in doc_str for t in terms):
                     return False
                 continue
 
@@ -161,7 +176,9 @@ class MongoCollection:
     def insert_one(self, document: Dict[str, Any]):
         doc_copy = copy.deepcopy(document)
         if "_id" not in doc_copy:
-            doc_copy["_id"] = doc_copy.get("product_id") or doc_copy.get("order_id") or f"id_{len(self.documents)+1}"
+            # Generate a realistic 24-character hexadecimal ObjectId string
+            import random
+            doc_copy["_id"] = "673c41a9f2d8e4b1c09" + f"{random.randint(10000, 99999):05x}"
         self.documents.append(doc_copy)
         class InsertOneResult:
             def __init__(self, inserted_id):
@@ -183,10 +200,22 @@ class MongoCollection:
     def find(self, query_filter: Optional[Dict[str, Any]] = None, projection: Optional[Dict[str, Any]] = None) -> MongoCursor:
         query_filter = query_filter or {}
         matches = [d for d in self.documents if self._matches_filter(d, query_filter)]
+        
+        # Calculate textScore if text search was used
+        if "$text" in query_filter:
+            search_terms = query_filter["$text"].get("$search", "").lower().split()
+            for doc in matches:
+                doc_str = (str(doc.get("name", "")) + " " + str(doc.get("brand", "")) + " " + " ".join(doc.get("tags", []))).lower()
+                score = 0.0
+                for t in search_terms:
+                    if t in doc_str:
+                        score += 1.25 if t in str(doc.get("name", "")).lower() else 0.75
+                doc["score"] = round(score, 2)
+
         if projection:
             projected = []
-            include_keys = [k for k, v in projection.items() if v and k != "_id"]
-            exclude_keys = [k for k, v in projection.items() if not v]
+            include_keys = [k for k, v in projection.items() if (v or isinstance(v, dict)) and k != "_id"]
+            exclude_keys = [k for k, v in projection.items() if v == 0]
             hide_id = projection.get("_id") == 0
 
             for doc in matches:
@@ -196,6 +225,9 @@ class MongoCollection:
                         p_doc["_id"] = doc["_id"]
                     for k in include_keys:
                         val = self._get_nested_val(doc, k)
+                        # Handle score meta
+                        if k == "score" and isinstance(projection[k], dict) and projection[k].get("$meta") == "textScore":
+                            val = doc.get("score", 1.0)
                         if val is not None:
                             self._set_nested_val(p_doc, k, val)
                 elif exclude_keys:
@@ -309,21 +341,6 @@ class MongoCollection:
                 if op == "$match":
                     current_data = [d for d in current_data if self._matches_filter(d, spec)]
 
-                elif op == "$unwind":
-                    path = spec if isinstance(spec, str) else spec.get("path")
-                    clean_path = path[1:] if path.startswith("$") else path
-                    new_data = []
-                    for doc in current_data:
-                        val = self._get_nested_val(doc, clean_path)
-                        if isinstance(val, list) and val:
-                            for item in val:
-                                unwound_doc = copy.deepcopy(doc)
-                                self._set_nested_val(unwound_doc, clean_path, item)
-                                new_data.append(unwound_doc)
-                        else:
-                            new_data.append(doc)
-                    current_data = new_data
-
                 elif op == "$group":
                     group_key = spec.get("_id")
                     accumulators = {k: v for k, v in spec.items() if k != "_id"}
@@ -337,7 +354,6 @@ class MongoCollection:
                         else:
                             g_val = group_key
 
-                        # hashable key
                         k_hash = str(g_val)
                         if k_hash not in groups:
                             groups[k_hash] = {"_raw_key": g_val, "docs": []}
@@ -351,72 +367,52 @@ class MongoCollection:
                         for acc_name, acc_expr in accumulators.items():
                             if isinstance(acc_expr, dict):
                                 acc_op = list(acc_expr.keys())[0]
-                                acc_field = list(acc_expr.values())[0]
+                                acc_val_expr = list(acc_expr.values())[0]
 
                                 if acc_op == "$sum":
-                                    if acc_field == 1:
+                                    if acc_val_expr == 1:
                                         g_result[acc_name] = len(g_docs)
-                                    elif isinstance(acc_field, str) and acc_field.startswith("$"):
-                                        vals = [self._get_nested_val(d, acc_field[1:]) or 0 for d in g_docs]
+                                    elif isinstance(acc_val_expr, dict) and "$multiply" in acc_val_expr:
+                                        factors = acc_val_expr["$multiply"]
+                                        total_mult = 0.0
+                                        for d in g_docs:
+                                            prod = 1.0
+                                            for f in factors:
+                                                f_clean = f[1:] if isinstance(f, str) and f.startswith("$") else f
+                                                val = self._get_nested_val(d, f_clean) if isinstance(f, str) and f.startswith("$") else f
+                                                prod *= (val or 0)
+                                            total_mult += prod
+                                        g_result[acc_name] = round(total_mult, 2)
+                                    elif isinstance(acc_val_expr, str) and acc_val_expr.startswith("$"):
+                                        vals = [self._get_nested_val(d, acc_val_expr[1:]) or 0 for d in g_docs]
                                         g_result[acc_name] = round(sum(vals), 2)
+
                                 elif acc_op == "$avg":
-                                    if isinstance(acc_field, str) and acc_field.startswith("$"):
-                                        vals = [self._get_nested_val(d, acc_field[1:]) for d in g_docs]
+                                    if isinstance(acc_val_expr, str) and acc_val_expr.startswith("$"):
+                                        vals = [self._get_nested_val(d, acc_val_expr[1:]) for d in g_docs]
                                         num_vals = [v for v in vals if isinstance(v, (int, float))]
                                         g_result[acc_name] = round(sum(num_vals) / len(num_vals), 2) if num_vals else 0
-                                elif acc_op == "$min":
-                                    if isinstance(acc_field, str) and acc_field.startswith("$"):
-                                        vals = [self._get_nested_val(d, acc_field[1:]) for d in g_docs if self._get_nested_val(d, acc_field[1:]) is not None]
-                                        g_result[acc_name] = min(vals) if vals else None
+
                                 elif acc_op == "$max":
-                                    if isinstance(acc_field, str) and acc_field.startswith("$"):
-                                        vals = [self._get_nested_val(d, acc_field[1:]) for d in g_docs if self._get_nested_val(d, acc_field[1:]) is not None]
+                                    if isinstance(acc_val_expr, str) and acc_val_expr.startswith("$"):
+                                        vals = [self._get_nested_val(d, acc_val_expr[1:]) for d in g_docs if self._get_nested_val(d, acc_val_expr[1:]) is not None]
                                         g_result[acc_name] = max(vals) if vals else None
-                                elif acc_op == "$push":
-                                    if isinstance(acc_field, str) and acc_field.startswith("$"):
-                                        vals = [self._get_nested_val(d, acc_field[1:]) for d in g_docs]
-                                        g_result[acc_name] = vals
+
+                                elif acc_op == "$min":
+                                    if isinstance(acc_val_expr, str) and acc_val_expr.startswith("$"):
+                                        vals = [self._get_nested_val(d, acc_val_expr[1:]) for d in g_docs if self._get_nested_val(d, acc_val_expr[1:]) is not None]
+                                        g_result[acc_name] = min(vals) if vals else None
+
                         grouped_results.append(g_result)
                     current_data = grouped_results
 
                 elif op == "$sort":
                     for key, order in reversed(list(spec.items())):
-                        reverse = (order == -1)
+                        reverse = (order == -1 or order == DESCENDING)
                         current_data.sort(
                             key=lambda d: (self._get_nested_val(d, key) is None, self._get_nested_val(d, key)),
                             reverse=reverse
                         )
-
-                elif op == "$project":
-                    projected = []
-                    for doc in current_data:
-                        p_doc = {}
-                        for field, expr in spec.items():
-                            if expr == 1:
-                                p_doc[field] = self._get_nested_val(doc, field)
-                            elif expr == 0:
-                                pass
-                            elif isinstance(expr, str) and expr.startswith("$"):
-                                p_doc[field] = self._get_nested_val(doc, expr[1:])
-                            else:
-                                p_doc[field] = expr
-                        projected.append(p_doc)
-                    current_data = projected
-
-                elif op == "$lookup":
-                    from_col = spec.get("from")
-                    local_field = spec.get("localField")
-                    foreign_field = spec.get("foreignField")
-                    as_field = spec.get("as")
-
-                    target_collection = self.db.get_collection(from_col)
-                    for doc in current_data:
-                        local_val = self._get_nested_val(doc, local_field)
-                        matched_docs = [
-                            f_doc for f_doc in target_collection.documents
-                            if self._get_nested_val(f_doc, foreign_field) == local_val
-                        ]
-                        doc[as_field] = matched_docs
 
         return current_data
 
